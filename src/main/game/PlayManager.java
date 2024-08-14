@@ -1,4 +1,4 @@
-package main;
+package main.game;
 
 import mino.*;
 
@@ -270,6 +270,7 @@ public class PlayManager {
         g2.setFont(g2.getFont().deriveFont(50f));
 
         if(KeyHandler.pausePressed){
+
             x = left_x+90;
             y = top_y+320;
             g2.drawString("Paused", x, y);

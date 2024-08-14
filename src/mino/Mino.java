@@ -1,7 +1,7 @@
 package mino;
 
-import main.KeyHandler;
-import main.PlayManager;
+import main.game.KeyHandler;
+import main.game.PlayManager;
 
 import java.awt.*;
 
