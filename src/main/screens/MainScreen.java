@@ -1,4 +1,3 @@
-// main/screens/MainScreen.java
 package main.screens;
 
 import javax.swing.*;
@@ -33,6 +32,7 @@ public class MainScreen extends JPanel {
         highScoresButton = createStyledButton("High Scores");
         exitButton = createStyledButton("Exit");
 
+
         // Add Action Listeners
         playButton.addActionListener(new PlayButtonListener());
         configButton.addActionListener(new ConfigButtonListener());
@@ -58,12 +58,12 @@ public class MainScreen extends JPanel {
         buttonPanel.add(exitButton, gbc);
 
         // Set background and add button panel to Main Screen
-        buttonPanel.setBackground(Color.cyan);
+        buttonPanel.setBackground(new Color(173, 216, 230)); // Soft Blue color
         this.add(buttonPanel, BorderLayout.CENTER);
 
         // Set Main Screen properties
         this.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
-        this.setBackground(Color.cyan);
+        this.setBackground(new Color(173, 216, 230)); // Match the button panel color
     }
 
     // Method to create a styled button with fixed size
@@ -108,7 +108,17 @@ public class MainScreen extends JPanel {
     private class ExitButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
+            int option = JOptionPane.showConfirmDialog(
+                    MainScreen.this,
+                    "Are you sure you want to exit?",
+                    "Confirm Exit",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (option == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
         }
     }
 }

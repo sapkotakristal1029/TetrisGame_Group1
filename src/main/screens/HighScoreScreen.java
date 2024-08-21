@@ -1,45 +1,107 @@
 package main.screens;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class HighScoreScreen extends JPanel {
 
     private JButton backButton;
 
+
     public HighScoreScreen(CardLayout cardLayout, JPanel cardPanel) {
         this.setLayout(new BorderLayout());
+        this.setBackground(new Color(173, 216, 230));
+
+        // Title Label
+        JLabel titleLabel = new JLabel("HIGH SCORE", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.BLACK); // Title color
+        titleLabel.setBorder(new EmptyBorder(10, 0, 10, 0)); // Add some padding around the title
+        this.add(titleLabel, BorderLayout.NORTH);
 
         // Top 10 Scores List
         String[] columnNames = {"Player Name", "Score"};
         Object[][] data = {
-                {"Alice", 1500},
-                {"Bob", 1400},
-                {"Charlie", 1300},
-                {"David", 1200},
-                {"Eve", 1100},
-                {"Frank", 1000},
-                {"Grace", 900},
-                {"Heidi", 800},
-                {"Ivan", 700},
-                {"Judy", 600}
+                {"Player1", 1500},
+                {"Player3", 1400},
+                {"Player3", 1300},
+                {"Player4", 1200},
+                {"Player5", 1100},
+                {"Player6", 1000},
+                {"Player7", 900},
+                {"Player8", 800},
+                {"Player9", 700},
+                {"Player10", 600}
         };
-        JTable scoreTable = new JTable(data, columnNames);
+
+        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Make the table non-editable
+            }
+        };
+
+        JTable scoreTable = new JTable(model);
+        scoreTable.setFillsViewportHeight(true);
+        scoreTable.setRowHeight(40); // Adjust row height for better readability
+
+        // Center text in cells
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        scoreTable.setDefaultRenderer(Object.class, centerRenderer);
+        scoreTable.setBackground(new Color(204, 255, 204));
+
+
+        // Adjust column widths
+        TableColumnModel columnModel = scoreTable.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(200); // Player Name column
+        columnModel.getColumn(1).setPreferredWidth(100); // Score column
+
+
+        // Set table header font and alignment
+        JTableHeader header = scoreTable.getTableHeader();
+        header.setFont(new Font("Arial", Font.BOLD, 18));
+        header.setBackground(new Color(34, 139, 34));
+        ((DefaultTableCellRenderer) header.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
         JScrollPane scrollPane = new JScrollPane(scoreTable);
 
+        // Create a panel to set padding color
+        JPanel paddedPanel = new JPanel();
+        paddedPanel.setBackground(new Color(173, 216, 230));
+        paddedPanel.setBorder(new EmptyBorder(20, 20, 20, 20)); // Padding around the table
+        paddedPanel.add(scrollPane);
+
         // Add Components
-        this.add(scrollPane, BorderLayout.CENTER);
+        this.add(paddedPanel, BorderLayout.CENTER);
 
         // Back Button
         backButton = new JButton("Back");
-        backButton.addActionListener(new BackButtonListener(cardLayout, cardPanel));
-        this.add(backButton, BorderLayout.SOUTH);
+        backButton.setFont(new Font("Arial", Font.PLAIN, 12)); // Smaller font
+        backButton.setBackground(new Color(173, 216, 230));
+        backButton.setForeground(Color.BLACK); // Button text color
+        backButton.setFocusPainted(false);
+        backButton.setPreferredSize(new Dimension(150, 30)); // Smaller button size
 
-        // Configure Panel
-        this.setPreferredSize(new Dimension(400, 300));
-        this.setBackground(Color.white);
+        // Panel to hold the back button
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setBackground(new Color(173, 216, 230));
+        buttonPanel.add(backButton);
+
+        backButton.addActionListener(new BackButtonListener(cardLayout, cardPanel));
+        this.add(buttonPanel, BorderLayout.SOUTH);
+        backButton.setBackground(Color.DARK_GRAY);
+        backButton.setForeground(Color.WHITE);
+
+        //Space after the back
+        JPanel spacer = new JPanel();
+        spacer.setPreferredSize(new Dimension(0, 180));
+        buttonPanel.add(spacer);
+
+
     }
 
     private class BackButtonListener implements ActionListener {

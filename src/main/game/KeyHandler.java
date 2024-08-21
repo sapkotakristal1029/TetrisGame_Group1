@@ -1,4 +1,3 @@
-// main/game/KeyHandler.java
 package main.game;
 
 import java.awt.event.KeyEvent;
@@ -17,7 +16,7 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        System.out.println("Key Pressed: " + KeyEvent.getKeyText(code)); // Debugging
+//        System.out.println("Key Pressed: " + KeyEvent.getKeyText(code));
 
         if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             upPressed = true;

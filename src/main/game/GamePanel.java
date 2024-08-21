@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     private CardLayout cardLayout;
     private JPanel cardPanel;
 
-    private boolean backPressed = false;
+    private boolean backPressed = false; // Flag to track if back button is pressed
 
     // Constructor with CardLayout and JPanel
     public GamePanel(CardLayout cardLayout, JPanel cardPanel) {
@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.cardPanel = cardPanel;
 
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        this.setBackground(Color.gray);
+        this.setBackground(Color.black); // Set background to black
         this.setLayout(null);
 
         // Implement Key handler
@@ -39,7 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Initialize and add back button
         backButton = new JButton("Back");
-        backButton.setBounds(WIDTH - 120, 20, 100, 30); // Position of the back button
+        backButton.setBounds(600, 670, 100, 30);
+        backButton.setBackground(Color.DARK_GRAY);
+        backButton.setForeground(Color.white);
         backButton.addActionListener(new BackButtonListener());
         this.add(backButton);
     }
@@ -85,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (!KeyHandler.pausePressed && !pm.gameOver) {
+        if (!KeyHandler.pausePressed && !pm.gameOver && !backPressed) {
             pm.update();
         }
     }
@@ -95,7 +97,28 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+        // Draw the black background
+        g2.setColor(Color.black);
+        g2.fillRect(0, 0, WIDTH, HEIGHT);
+
+        // Draw Tetris-like title text on the left side
+        g2.setFont(new Font("SansSerif", Font.BOLD, 100));
+        g2.setColor(new Color(128, 0, 128));
+        g2.drawString("TETRIS", 50, 350);
+        g2.drawString("GAME", 75, 450);
+
+
+
+        // Draw game elements
         pm.draw(g2);
+
+        // If the game is paused due to back button press, display "Paused"
+        if (backPressed) {
+            g2.setFont(new Font("Arial", Font.BOLD, 50));
+            g2.setColor(Color.yellow);
+            g2.drawString("Paused", WIDTH / 2 - 100, HEIGHT / 2);
+        }
     }
 
     @Override
@@ -112,6 +135,10 @@ public class GamePanel extends JPanel implements Runnable {
             // Stop the game to pause it
             stopGame();
 
+            // Set the backPressed flag to true and repaint the screen
+            backPressed = true;
+            repaint();
+
             int option = JOptionPane.showConfirmDialog(
                     GamePanel.this,
                     "Do you want to go back? This will forfeit the current game.",
@@ -125,7 +152,9 @@ public class GamePanel extends JPanel implements Runnable {
             } else if (option == JOptionPane.NO_OPTION) {
                 // Resume the game if it was paused
                 if (!running) {
+                    backPressed = false; // Reset the flag
                     startGame();
+                    requestFocusInWindow(); // Request focus back to the game panel
                 }
             }
         }
@@ -140,6 +169,11 @@ public class GamePanel extends JPanel implements Runnable {
             // Switch to the MainScreen
             cardPanel.remove(GamePanel.this);
             cardLayout.show(cardPanel, "MainScreen");
+
+            //Unpause game if paused
+            if(KeyHandler.pausePressed){
+                KeyHandler.pausePressed= false;
+            }
         }
     }
 }

@@ -1,9 +1,7 @@
 package main;
 
 import main.game.GamePanel;
-import main.screens.MainScreen;
-import main.screens.ConfigurationScreen;
-import main.screens.HighScoreScreen;
+import main.screens.*;
 
 import javax.swing.*;
 import java.awt.*;
