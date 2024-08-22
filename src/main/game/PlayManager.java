@@ -18,11 +18,11 @@ public class PlayManager {
 
     // MINO
     Mino currentMino;
-    final int MINO_START_X;
-    final int MINO_START_Y;
+    public int MINO_START_X;
+    public int MINO_START_Y;
     Mino nextMino;
-    final int NEXTMINO_X;
-    final int NEXTMINO_Y;
+    public int NEXTMINO_X;
+    public int NEXTMINO_Y;
 
     public static ArrayList<Block> staticBlocks = new ArrayList<>();
 
@@ -46,25 +46,24 @@ public class PlayManager {
     private boolean isAnimating = false;
 
     public PlayManager() {
+        initialize();
+    }
 
+    private void initialize() {
         // Main Play Area Frame
         left_x = (GamePanel.WIDTH / 2) - (WIDTH / 2);
         right_x = left_x + WIDTH;
         top_y = 50;
         bottom_y = top_y + HEIGHT;
 
-        MINO_START_X = left_x + (WIDTH / 2 - Block.SIZE);
+        MINO_START_X = left_x + (WIDTH / 2);
         MINO_START_Y = top_y + Block.SIZE;
 
         NEXTMINO_X = right_x + 175;
         NEXTMINO_Y = top_y + 500;
 
-        // Set the starting Mino
-        currentMino = pickMino();
-        currentMino.setXY(MINO_START_X, MINO_START_Y);
-
-        nextMino = pickMino();
-        nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
+        // Initialize game state
+        resetGame();
     }
 
     private Mino pickMino() {
@@ -84,6 +83,10 @@ public class PlayManager {
     }
 
     public void update() {
+        if (gameOver) {
+            return;
+        }
+
         // Check if the correct mino is active
         if (!currentMino.active) {
             // If not active, put it in the static blocks
@@ -94,7 +97,6 @@ public class PlayManager {
 
             // Check if the game is over
             if (currentMino.b[0].x == MINO_START_X && currentMino.b[0].y == MINO_START_Y) {
-                // This means there is no place to fall the mino, so it is game over
                 gameOver = true;
             }
             currentMino.deactivating = false;
@@ -154,6 +156,8 @@ public class PlayManager {
     }
 
     private void finalizeLineDeletion() {
+        int linesDeleted = effectY.size();  // Number of lines deleted at once
+
         for (Integer y : effectY) {
             for (int i = staticBlocks.size() - 1; i > -1; i--) {
                 if (staticBlocks.get(i).y == y) {
@@ -167,15 +171,17 @@ public class PlayManager {
             }
         }
         effectY.clear();
-        lines++;
-        int singleLineScore = 10;
-        score += singleLineScore;
 
-        // Increase level and decrease drop interval if needed
-        if (lines % 10 == 0 && dropInterval > 1) {
-            level++;
-            dropInterval = Math.max(dropInterval - 10, 1);
-        }
+        // Update score based on the number of lines deleted at once
+        int singleLineScore = 10;
+        score += singleLineScore * linesDeleted;
+
+        // Update the total lines count
+        lines += linesDeleted;
+
+        // Update level and drop interval based on the score
+        level = Math.min(score / 50 + 1, 10); // Increase level for every 50 points, up to level 10
+        dropInterval = Math.max(60 - (level - 1) * 6, 10); // Faster drop with higher levels, minimum interval of 10
     }
 
     public void draw(Graphics2D g2) {
@@ -236,5 +242,33 @@ public class PlayManager {
             g2.setColor(Color.yellow);
             g2.drawString("Paused", 540, 360);
         }
+    }
+
+    public void resetGame() {
+        // Reset all game variables
+        staticBlocks.clear();
+        effectY.clear();
+
+        score = 0;
+        lines = 0;
+        level = 1;
+        dropInterval = 60;
+
+        effectCounterOn = false;
+        isAnimating = false;
+        animationStep = 0;
+        gameOver = false;
+
+        //Unpause game if paused
+        if(KeyHandler.pausePressed){
+            KeyHandler.pausePressed= false;
+        }
+
+        // Reinitialize the minos
+        currentMino = pickMino();
+        currentMino.setXY(MINO_START_X, MINO_START_Y);
+
+        nextMino = pickMino();
+        nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
     }
 }

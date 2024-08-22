@@ -24,8 +24,10 @@ public class ConfigurationScreen extends JPanel {
     private JButton backButton;
 
     String spaces = " ".repeat(100);
+    String space1 = " ".repeat(25);
     String onText = spaces + "On";
     String offText = spaces + "Off";
+    String labelText = space1+ "Configuration";
     Color softBlue = new Color(173, 216, 230); // Soft blue color
 
     public ConfigurationScreen(CardLayout cardLayout, JPanel cardPanel) {
@@ -37,9 +39,20 @@ public class ConfigurationScreen extends JPanel {
         // Set panel background color
         this.setBackground(softBlue);
 
-        // Field Width Slider
+        // Title
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 3; // Span across all columns
+        gbc.anchor = GridBagConstraints.CENTER;
+        JLabel titleLabel = new JLabel(labelText);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setForeground(Color.black);
+        this.add(titleLabel, gbc);
+
+        // Field Width Slider
+        gbc.gridwidth = 1; // Reset to default
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         this.add(new JLabel("Field Width:"), gbc);
         fieldWidthSlider = new JSlider(5, 15, 12);
         fieldWidthSlider.setMajorTickSpacing(1);
@@ -57,7 +70,7 @@ public class ConfigurationScreen extends JPanel {
 
         // Field Height Slider
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         this.add(new JLabel("Field Height:"), gbc);
         fieldHeightSlider = new JSlider(15, 30, 15);
         fieldHeightSlider.setMajorTickSpacing(1);
@@ -75,7 +88,7 @@ public class ConfigurationScreen extends JPanel {
 
         // Game Level Slider
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         this.add(new JLabel("Game Level:"), gbc);
         gameLevelSlider = new JSlider(1, 10, 1);
         gameLevelSlider.setMajorTickSpacing(1);
@@ -93,7 +106,7 @@ public class ConfigurationScreen extends JPanel {
 
         // Music On/Off
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 4;
         this.add(new JLabel("Music:"), gbc);
         musicCheckBox = new JCheckBox(offText);
         customizeCheckBox(musicCheckBox);
@@ -103,7 +116,7 @@ public class ConfigurationScreen extends JPanel {
 
         // Sound Effect On/Off
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         this.add(new JLabel("Sound Effects:"), gbc);
         soundEffectCheckBox = new JCheckBox(offText);
         customizeCheckBox(soundEffectCheckBox);
@@ -113,7 +126,7 @@ public class ConfigurationScreen extends JPanel {
 
         // AI Play
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         this.add(new JLabel("AI Play:"), gbc);
         aiPlayCheckBox = new JCheckBox(offText);
         customizeCheckBox(aiPlayCheckBox);
@@ -123,7 +136,7 @@ public class ConfigurationScreen extends JPanel {
 
         // Extended Mode
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         this.add(new JLabel("Extended Mode:"), gbc);
         extendModeCheckBox = new JCheckBox(offText);
         customizeCheckBox(extendModeCheckBox);
@@ -132,20 +145,18 @@ public class ConfigurationScreen extends JPanel {
         extendModeCheckBox.addActionListener(e -> updateCheckBoxLabel(extendModeCheckBox));
 
         // Back Button
-        // Back Button
         gbc.gridx = 0;
-        gbc.gridy = 7;
-        gbc.gridwidth = 2;
+        gbc.gridy = 8;
+        gbc.gridwidth = 3;
         gbc.anchor = GridBagConstraints.CENTER;
         backButton = new JButton("Back");
         backButton.setBackground(Color.black);
         backButton.setForeground(Color.white);
         backButton.setFocusPainted(false);
         backButton.setOpaque(true);
-        backButton.setPreferredSize(new Dimension(20, 30)); // Set size to 100x30 pixels
+        backButton.setPreferredSize(new Dimension(100, 30)); // Set size to 100x30 pixels
         backButton.addActionListener(new BackButtonListener(cardLayout, cardPanel));
         this.add(backButton, gbc);
-
     }
 
     private void customizeCheckBox(JCheckBox checkBox) {

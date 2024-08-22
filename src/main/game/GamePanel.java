@@ -139,32 +139,40 @@ public class GamePanel extends JPanel implements Runnable {
             backPressed = true;
             repaint();
 
-            int option = JOptionPane.showConfirmDialog(
-                    GamePanel.this,
-                    "Do you want to go back? This will forfeit the current game.",
-                    "Confirm Back",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE
-            );
 
-            if (option == JOptionPane.YES_OPTION) {
+            //Do back directly if Game over is pressed
+            if (pm.gameOver){
                 resetAndShowMainScreen();
-            } else if (option == JOptionPane.NO_OPTION) {
-                // Resume the game if it was paused
-                if (!running) {
-                    backPressed = false; // Reset the flag
-                    startGame();
-                    requestFocusInWindow(); // Request focus back to the game panel
+            }else{
+
+                int option = JOptionPane.showConfirmDialog(
+                        GamePanel.this,
+                        "Do you want to go back? This will forfeit the current game.",
+                        "Confirm Back",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (option == JOptionPane.YES_OPTION) {
+                    resetAndShowMainScreen();
+                } else if (option == JOptionPane.NO_OPTION) {
+                    // Resume the game if it was paused
+                    if (!running) {
+                        backPressed = false; // Reset the flag
+                        startGame();
+                        requestFocusInWindow(); // Request focus back to the game panel
+                    }
                 }
+
             }
+
+
         }
 
         private void resetAndShowMainScreen() {
-            // Reset game state (reinitialize PlayManager)
-            pm = new PlayManager();
 
             // Clear static blocks
-            PlayManager.staticBlocks.clear();
+            pm.resetGame();
 
             // Switch to the MainScreen
             cardPanel.remove(GamePanel.this);

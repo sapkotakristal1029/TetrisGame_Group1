@@ -38,7 +38,6 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
-        System.out.println("Key Released: " + KeyEvent.getKeyText(code)); // Debugging
 
         if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             upPressed = false;
