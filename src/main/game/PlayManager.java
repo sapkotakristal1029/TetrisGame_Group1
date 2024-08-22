@@ -30,7 +30,7 @@ public class PlayManager {
     public static int dropInterval = 60;
     boolean gameOver;
 
-    // Effect of deleting line
+    // Effect and Animation of deleting line
     boolean effectCounterOn;
     int effectCounter;
     ArrayList<Integer> effectY = new ArrayList<>();

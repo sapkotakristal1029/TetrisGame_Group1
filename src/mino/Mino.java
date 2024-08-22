@@ -174,7 +174,7 @@ public class Mino {
 
         //Key handler
         if(KeyHandler.upPressed){
-            System.out.println("I am clicked");
+//            System.out.println("I am clicked");
             //Rotation
 
             switch (direction){
