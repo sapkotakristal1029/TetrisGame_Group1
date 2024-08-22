@@ -9,7 +9,7 @@ import java.util.Random;
 public class PlayManager {
 
     // Main play area
-    final int WIDTH = 360;
+    final int WIDTH = 300;
     final int HEIGHT = 600;
     public static int left_x;
     public static int right_x;
@@ -56,7 +56,7 @@ public class PlayManager {
         top_y = 50;
         bottom_y = top_y + HEIGHT;
 
-        MINO_START_X = left_x + (WIDTH / 2);
+        MINO_START_X = left_x + (WIDTH / 2)- Block.SIZE;
         MINO_START_Y = top_y + Block.SIZE;
 
         NEXTMINO_X = right_x + 175;
@@ -138,7 +138,7 @@ public class PlayManager {
             x += Block.SIZE;
 
             if (x == right_x) {
-                if (blockCount == 12) {
+                if (blockCount == 10) {
                     effectCounterOn = true;
                     effectY.add(y);
                     startAnimation(); // Start the fade-out animation
@@ -173,8 +173,16 @@ public class PlayManager {
         effectY.clear();
 
         // Update score based on the number of lines deleted at once
+        int multiplier = switch (linesDeleted) {
+            case 2 -> 2;
+            case 3 -> 3;
+            case 4 -> 4;
+            default -> 1;
+        };
+
         int singleLineScore = 10;
-        score += singleLineScore * linesDeleted;
+        score += singleLineScore * linesDeleted * multiplier;
+
 
         // Update the total lines count
         lines += linesDeleted;
@@ -223,7 +231,7 @@ public class PlayManager {
         g2.drawString("SCORE: " + score, x, y);
 
         if (effectCounterOn) {
-            g2.setColor(new Color(255, 0, 0, 255 - (animationStep * 12))); // Red with decreasing opacity
+            g2.setColor(new Color(255, 0, 0, 255 - (animationStep * 10))); // Red with decreasing opacity
             for (Integer yCoord : effectY) {
                 g2.fillRect(left_x, yCoord, WIDTH, Block.SIZE);
             }
@@ -252,7 +260,7 @@ public class PlayManager {
         score = 0;
         lines = 0;
         level = 1;
-        dropInterval = 60;
+        dropInterval = Math.max(59 - (level) * 6, 10);
 
         effectCounterOn = false;
         isAnimating = false;
