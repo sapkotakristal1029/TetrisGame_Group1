@@ -24,10 +24,7 @@ public class SplashScreen extends JWindow {
 
         // Add splash screen content
         JLabel label = new JLabel(new ImageIcon("src/main/images/splash.png"));
-        JLabel copyright = new JLabel("Copyright 2024, Group - 1", JLabel.CENTER);
-        copyright.setFont(new Font("Sans-Serif", Font.BOLD, 12));
         content.add(label, BorderLayout.CENTER);
-        content.add(copyright, BorderLayout.SOUTH);
 
         setVisible(true);
 

@@ -14,24 +14,22 @@ public class MainScreen extends JPanel {
     private JButton exitButton;
     private CardLayout cardLayout;
     private JPanel cardPanel;
+    private Image backgroundImage;
 
     public MainScreen(CardLayout cardLayout, JPanel cardPanel) {
         this.cardLayout = cardLayout;
         this.cardPanel = cardPanel;
-        this.setLayout(new BorderLayout());
 
-        // Create and style the title
-        JLabel titleLabel = new JLabel("Main Menu", JLabel.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 40));
-        titleLabel.setForeground(Color.BLACK);
-        this.add(titleLabel, BorderLayout.NORTH);
+        // Load the background image
+        backgroundImage = new ImageIcon("src/main/images/mainmenu.png").getImage();
+
+        this.setLayout(new BorderLayout());
 
         // Create and style Buttons
         playButton = createStyledButton("Play");
         configButton = createStyledButton("Configuration");
         highScoresButton = createStyledButton("High Scores");
         exitButton = createStyledButton("Exit");
-
 
         // Add Action Listeners
         playButton.addActionListener(new PlayButtonListener());
@@ -57,13 +55,19 @@ public class MainScreen extends JPanel {
         gbc.gridy++;
         buttonPanel.add(exitButton, gbc);
 
-        // Set background and add button panel to Main Screen
-        buttonPanel.setBackground(new Color(173, 216, 230)); // Soft Blue color
+        // Set background for button panel
+        buttonPanel.setOpaque(false); // Make button panel transparent
         this.add(buttonPanel, BorderLayout.CENTER);
 
         // Set Main Screen properties
         this.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
-        this.setBackground(new Color(173, 216, 230)); // Match the button panel color
+    }
+
+    // Override the paintComponent method to draw the background image
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 
     // Method to create a styled button with fixed size

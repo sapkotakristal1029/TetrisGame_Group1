@@ -249,6 +249,8 @@ public class PlayManager {
             g2.setFont(new Font("Arial", Font.BOLD, 50));
             g2.setColor(Color.yellow);
             g2.drawString("Paused", 540, 360);
+            g2.setFont(new Font("Arial", Font.BOLD, 25));
+            g2.drawString("Press P to continue", 510, 400);
         }
     }
 
