@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -17,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     private JButton backButton; // Add back button
     private CardLayout cardLayout;
     private JPanel cardPanel;
+
 
     private boolean backPressed = false; // Flag to track if back button is pressed
 
@@ -44,6 +46,9 @@ public class GamePanel extends JPanel implements Runnable {
         backButton.setForeground(Color.white);
         backButton.addActionListener(new BackButtonListener());
         this.add(backButton);
+
+
+
     }
 
     // Start or resume the game

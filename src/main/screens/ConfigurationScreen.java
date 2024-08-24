@@ -1,13 +1,14 @@
 package main.screens;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicCheckBoxUI;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
+
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicCheckBoxUI;
+
+import main.game.KeyHandler;
 
 public class ConfigurationScreen extends JPanel {
 
@@ -27,7 +28,7 @@ public class ConfigurationScreen extends JPanel {
     String space1 = " ".repeat(25);
     String onText = spaces + "On";
     String offText = spaces + "Off";
-    String labelText = space1+ "Configuration";
+    String labelText = space1 + "Configuration";
     Color softBlue = new Color(173, 216, 230); // Soft blue color
 
     public ConfigurationScreen(CardLayout cardLayout, JPanel cardPanel) {
@@ -157,6 +158,9 @@ public class ConfigurationScreen extends JPanel {
         backButton.setPreferredSize(new Dimension(100, 30)); // Set size to 100x30 pixels
         backButton.addActionListener(new BackButtonListener(cardLayout, cardPanel));
         this.add(backButton, gbc);
+
+        // Pass the ConfigurationScreen instance to the KeyHandler
+        KeyHandler.setConfigurationScreen(this);
     }
 
     private void customizeCheckBox(JCheckBox checkBox) {
@@ -177,6 +181,16 @@ public class ConfigurationScreen extends JPanel {
 
     private void updateCheckBoxLabel(JCheckBox checkBox) {
         checkBox.setText(checkBox.isSelected() ? onText : offText);
+    }
+
+    public void toggleMusic() {
+        musicCheckBox.setSelected(!musicCheckBox.isSelected());
+        updateCheckBoxLabel(musicCheckBox);
+    }
+
+    public void toggleSound() {
+        soundEffectCheckBox.setSelected(!soundEffectCheckBox.isSelected());
+        updateCheckBoxLabel(soundEffectCheckBox);
     }
 
     private static class CustomCheckBoxUI extends BasicCheckBoxUI {

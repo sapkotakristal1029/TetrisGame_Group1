@@ -1,12 +1,24 @@
 package main.game;
 
+import main.screens.ConfigurationScreen;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
+     static ConfigurationScreen configurationScreen;
+
+    // Key press states
     public static boolean upPressed, downPressed, leftPressed, rightPressed;
     public static boolean pausePressed = false;
+    public static boolean musicPressed = false;
+    public static boolean soundPressed = false;
+
+    // Setter for ConfigurationScreen reference
+    public static void setConfigurationScreen(ConfigurationScreen screen) {
+        configurationScreen = screen;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -16,7 +28,6 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-//        System.out.println("Key Pressed: " + KeyEvent.getKeyText(code));
 
         if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
             upPressed = true;
@@ -32,6 +43,18 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_SPACE || code == KeyEvent.VK_P) {
             pausePressed = !pausePressed;
+        }
+        if (code == KeyEvent.VK_M) {
+            musicPressed = !musicPressed;
+            if (configurationScreen != null) {
+                configurationScreen.toggleMusic(); // Toggle music checkbox
+            }
+        }
+        if (code == KeyEvent.VK_N) {
+            soundPressed = !soundPressed;
+            if (configurationScreen != null) {
+                configurationScreen.toggleSound(); // Toggle sound effect checkbox
+            }
         }
     }
 
