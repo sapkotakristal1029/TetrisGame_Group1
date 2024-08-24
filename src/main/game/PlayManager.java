@@ -187,8 +187,8 @@ public class PlayManager {
         // Update the total lines count
         lines += linesDeleted;
 
-        // Update level and drop interval based on the score
-        level = Math.min(score / 50 + 1, 10); // Increase level for every 50 points, up to level 10
+        // Update level and drop interval based on the rows deleted
+        level = Math.min(lines / 5, 10); // Increase level for every 50 points, up to level 10
         dropInterval = Math.max(60 - (level - 1) * 6, 10); // Faster drop with higher levels, minimum interval of 10
     }
 
