@@ -8,8 +8,7 @@ public class Mino_Square extends Mino{
 
     }
     public void setXY(int x, int y){
-        //0 b[1]
-        //0  b[0]
+        //0 0
         //0 0
 
         b[0].x = x;
