@@ -8,8 +8,8 @@ import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    public static final int WIDTH = 1280;
-    public static final int HEIGHT = 720;
+    public static final int WIDTH = 1300;
+    public static final int HEIGHT = 850;
 
     private static final int FPS = 60; // Frames per second
     private Thread gameThread;
@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Initialize and add back button
         backButton = new JButton("Back");
-        backButton.setBounds(600, 670, 100, 30);
+        backButton.setBounds(1200, 820, 100, 30);
         backButton.setBackground(Color.DARK_GRAY);
         backButton.setForeground(Color.white);
         backButton.addActionListener(new BackButtonListener());

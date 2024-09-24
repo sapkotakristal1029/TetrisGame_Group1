@@ -12,11 +12,15 @@ import main.game.KeyHandler;
 
 public class ConfigurationScreen extends JPanel {
 
-    private JSlider fieldWidthSlider;
+    public static int fieldWidthValue = 10;
+    public static int fieldHeightValue = 20;
+    public static int gameLevelValue = 1;
+
+    public static JSlider fieldWidthSlider;
     private JLabel fieldWidthLabel;
-    private JSlider fieldHeightSlider;
+    public static JSlider fieldHeightSlider;
     private JLabel fieldHeightLabel;
-    private JSlider gameLevelSlider;
+    public static JSlider gameLevelSlider;
     private JLabel gameLevelLabel;
     private JCheckBox musicCheckBox;
     private JCheckBox soundEffectCheckBox;
@@ -55,19 +59,27 @@ public class ConfigurationScreen extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 1;
         this.add(new JLabel("Field Width:"), gbc);
-        fieldWidthSlider = new JSlider(5, 15, 10);
-        fieldWidthSlider.setMajorTickSpacing(1);
-        fieldWidthSlider.setMinorTickSpacing(1);
+        fieldWidthSlider = new JSlider(6, 16, 10);
+        fieldWidthSlider.setMajorTickSpacing(2);
         fieldWidthSlider.setPaintTicks(true);
         fieldWidthSlider.setPaintLabels(true);
-        fieldWidthSlider.setLabelTable(createLabelTable(5, 15));
+        fieldWidthSlider.setLabelTable(createLabelTable(6, 16));
         fieldWidthSlider.setBackground(softBlue);
         fieldWidthLabel = new JLabel("10");
         gbc.gridx = 1;
         this.add(fieldWidthSlider, gbc);
         gbc.gridx = 2;
         this.add(fieldWidthLabel, gbc);
-        fieldWidthSlider.addChangeListener(e -> fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue())));
+        fieldWidthSlider.addChangeListener(e -> {
+            int value = fieldWidthSlider.getValue();
+            if (value % 2 != 0) { // If the value is odd, adjust it
+                fieldWidthSlider.setValue(value - 1); // Set to the previous even number
+            }
+            fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
+//            fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
+//            fieldWidthValue = fieldWidthSlider.getValue();
+
+        });
 
         // Field Height Slider
         gbc.gridx = 0;
@@ -85,7 +97,10 @@ public class ConfigurationScreen extends JPanel {
         this.add(fieldHeightSlider, gbc);
         gbc.gridx = 2;
         this.add(fieldHeightLabel, gbc);
-        fieldHeightSlider.addChangeListener(e -> fieldHeightLabel.setText(String.valueOf(fieldHeightSlider.getValue())));
+        fieldHeightSlider.addChangeListener(e -> {
+            fieldHeightLabel.setText(String.valueOf(fieldHeightSlider.getValue()));
+            fieldHeightValue = fieldHeightSlider.getValue();
+        });
 
         // Game Level Slider
         gbc.gridx = 0;
@@ -103,7 +118,10 @@ public class ConfigurationScreen extends JPanel {
         this.add(gameLevelSlider, gbc);
         gbc.gridx = 2;
         this.add(gameLevelLabel, gbc);
-        gameLevelSlider.addChangeListener(e -> gameLevelLabel.setText(String.valueOf(gameLevelSlider.getValue())));
+        gameLevelSlider.addChangeListener(e -> {
+            gameLevelLabel.setText(String.valueOf(gameLevelSlider.getValue()));
+            gameLevelValue = gameLevelSlider.getValue();
+        });
 
         // Music On/Off
         gbc.gridx = 0;

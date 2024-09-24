@@ -5,12 +5,11 @@ import mino.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
+import main.screens.ConfigurationScreen;
 
 public class PlayManager {
-
-    // Main play area
-    final int WIDTH = 300;
-    final int HEIGHT = 600;
+    public int WIDTH = ConfigurationScreen.fieldWidthValue * Block.SIZE;
+    public int HEIGHT = ConfigurationScreen.fieldHeightValue * Block.SIZE;
     public static int left_x;
     public static int right_x;
     public static int top_y;
@@ -36,7 +35,7 @@ public class PlayManager {
     ArrayList<Integer> effectY = new ArrayList<>();
 
     // Score
-    int level = 1;
+    int level = ConfigurationScreen.gameLevelValue;
     int lines;
     int score;
 
@@ -50,8 +49,9 @@ public class PlayManager {
     }
 
     private void initialize() {
+        System.out.println("GAme Started at "+WIDTH+","+HEIGHT);
         // Main Play Area Frame
-        left_x = (GamePanel.WIDTH / 2) - (WIDTH / 2);
+        left_x = (GamePanel.WIDTH / 4);
         right_x = left_x + WIDTH;
         top_y = 50;
         bottom_y = top_y + HEIGHT;
@@ -59,8 +59,8 @@ public class PlayManager {
         MINO_START_X = left_x + (WIDTH / 2)- Block.SIZE;
         MINO_START_Y = top_y + Block.SIZE;
 
-        NEXTMINO_X = right_x + 175;
-        NEXTMINO_Y = top_y + 500;
+        NEXTMINO_X = right_x + 100;
+        NEXTMINO_Y = top_y + 300;
 
         // Initialize game state
         resetGame();
@@ -138,7 +138,7 @@ public class PlayManager {
             x += Block.SIZE;
 
             if (x == right_x) {
-                if (blockCount == 10) {
+                if (blockCount == WIDTH/Block.SIZE) {
                     effectCounterOn = true;
                     effectY.add(y);
                     startAnimation(); // Start the fade-out animation
@@ -198,13 +198,13 @@ public class PlayManager {
         g2.drawRect(left_x - 4, top_y - 4, WIDTH + 8, HEIGHT + 8);
 
         // Draw a mino frame
-        int x = right_x + 100;
-        int y = bottom_y - 200;
+        int x = right_x + 50;
+        int y = top_y + 200;
         g2.setColor(new Color(128, 0, 128)); // Purple color
-        g2.drawRect(x, y, 200, 200);
-        g2.setFont(new Font("Arial", Font.PLAIN, 30));
+        g2.drawRect(x, y, 150, 175);
+        g2.setFont(new Font("Arial", Font.PLAIN, 20));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.drawString("NEXT", x + 60, y + 60);
+        g2.drawString("NEXT", x + 50, y + 60);
 
         // Draw the current mino
         if (currentMino != null) {
@@ -221,13 +221,13 @@ public class PlayManager {
 
         // Draw score frame
         g2.setColor(new Color(128, 0, 128)); // Purple color
-        g2.drawRect(x, top_y, 250, 300);
-        x += 40;
-        y = top_y + 90;
+        g2.drawRect(x, top_y, 150, 200);
+        x += 25;
+        y = top_y + 40;
         g2.drawString("LEVEL: " + level, x, y);
-        y += 70;
+        y += 60;
         g2.drawString("LINES: " + lines, x, y);
-        y += 70;
+        y += 60;
         g2.drawString("SCORE: " + score, x, y);
 
         if (effectCounterOn) {
@@ -261,7 +261,7 @@ public class PlayManager {
 
         score = 0;
         lines = 0;
-        level = 1;
+        level = ConfigurationScreen.gameLevelValue;
         dropInterval = Math.max(59 - (level) * 6, 10);
 
         effectCounterOn = false;
