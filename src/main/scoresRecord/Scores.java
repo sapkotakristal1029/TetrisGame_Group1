@@ -15,12 +15,17 @@ import java.util.List;
 
 public class Scores {
     private static final String Scores_file = "database/scores.json";
-
     public static void saveScore(Player player){
         Gson gson = new Gson();
         List<Player> playerList = LoadScores();
         playerList.add(player);
 
+        // Sort the list in descending order by score
+        playerList.sort(Comparator.comparingInt(Player::getScore).reversed());
+        // Keep only the top 10 scores
+        if (playerList.size() > 10) {
+            playerList = playerList.subList(0, 10);
+        }
         try (FileWriter fw = new FileWriter(Scores_file)) {
              gson.toJson(playerList, fw);
         } catch (IOException e) {
@@ -70,10 +75,16 @@ public class Scores {
         }
     }
 
-    public static List<Player> getTopScores(int top){
+    public static List<Player> getTopScores(){
         List<Player> playerList = LoadScores();
-        playerList.sort(Comparator.comparingInt(Player::getScore).reversed());
-        return new ArrayList<>(playerList.subList(0, Math.min(top, playerList.size())));
+        return new ArrayList<>(playerList);
+    }
+
+    public static int lastScore(){
+        List<Player> topPlayers = Scores.getTopScores();
+        int listLen = topPlayers.size();
+        int score = topPlayers.get(listLen-1).getScore();
+        return score;
     }
 
     //for testing
@@ -85,8 +96,8 @@ public class Scores {
 //        saveScore(new Player("Charlie", 200));
 
         // Display top 30 scores
-        displayTopScores(30);
-        List<Player> topPlayers = getTopScores(3);
+        displayTopScores(10);
+        List<Player> topPlayers = getTopScores();
         System.out.println("Top Players List: " + topPlayers);
 
     }
