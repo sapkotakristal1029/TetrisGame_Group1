@@ -23,7 +23,7 @@ public class SplashScreen extends JWindow {
         setBounds(x, y, width, height);
 
         // Add splash screen content
-        JLabel label = new JLabel(new ImageIcon("src/main/images/splash.png"));
+        JLabel label = new JLabel(new ImageIcon("src/main/resources/images/splash.png"));
         content.add(label, BorderLayout.CENTER);
 
         setVisible(true);

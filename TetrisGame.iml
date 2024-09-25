@@ -10,7 +10,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://$MODULE_DIR$/ExternalJar/gson-2.11.0.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/lib/jl1.0.1.jar!/" />
+>>>>>>> 033c01c9608f52f221c414b40e937ba8a060faf0
         </CLASSES>
         <JAVADOC />
         <SOURCES />

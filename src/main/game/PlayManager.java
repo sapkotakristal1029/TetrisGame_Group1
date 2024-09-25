@@ -1,5 +1,6 @@
 package main.game;
 
+import main.Sound;
 import mino.*;
 
 import java.awt.*;
@@ -8,6 +9,17 @@ import java.util.Random;
 import main.screens.ConfigurationScreen;
 
 public class PlayManager {
+
+    public static Boolean secondPlayerSelected = true;
+
+    public static Sound gameStartSound;
+    public static Sound gameOverSound;
+    public static Sound gameScoreSound;
+    public boolean musicPlaying = true; // Track music state
+    public boolean soundEffectsOn = true; // Track sound effects state
+
+
+
     public int WIDTH = ConfigurationScreen.fieldWidthValue * Block.SIZE;
     public int HEIGHT = ConfigurationScreen.fieldHeightValue * Block.SIZE;
     public static int left_x;
@@ -15,6 +27,8 @@ public class PlayManager {
     public static int top_y;
     public static int bottom_y;
     private GamePanel gp;
+
+
     // MINO
     Mino currentMino;
     public int MINO_START_X;
@@ -22,6 +36,7 @@ public class PlayManager {
     Mino nextMino;
     public int NEXTMINO_X;
     public int NEXTMINO_Y;
+
 
     public static ArrayList<Block> staticBlocks = new ArrayList<>();
 
@@ -31,7 +46,6 @@ public class PlayManager {
 
     // Effect and Animation of deleting line
     boolean effectCounterOn;
-    int effectCounter;
     ArrayList<Integer> effectY = new ArrayList<>();
 
     // Score
@@ -46,9 +60,19 @@ public class PlayManager {
 
     public PlayManager() {
         initialize();
+        // Register the PlayManager in KeyHandler to allow key handling
+        KeyHandler.setPlayManager(this);
     }
 
     private void initialize() {
+        gameStartSound = new Sound("src/main/resources/MusicFiles/gameStart.wav");
+        gameOverSound = new Sound("src/main/resources/MusicFiles/gameOver.wav");
+        gameScoreSound = new Sound("src/main/resources/MusicFiles/gameScore.wav");
+
+        // Play the game start sound
+        gameStartSound.play();
+        musicPlaying=true;
+
         System.out.println("GAme Started at "+WIDTH+","+HEIGHT);
         // Main Play Area Frame
         left_x = (GamePanel.WIDTH / 4);
@@ -64,6 +88,36 @@ public class PlayManager {
 
         // Initialize game state
         resetGame();
+    }
+    public void toggleMusic() {
+        if (musicPlaying) {
+            gameStartSound.stop();
+        } else {
+            gameStartSound.play();
+        }
+        musicPlaying = !musicPlaying;
+    }
+
+    // Method to toggle sound effects
+    public void toggleSoundEffects() {
+
+        if (soundEffectsOn) {
+            gameOverSound.stop();
+            gameScoreSound.stop();
+        }
+        soundEffectsOn = !soundEffectsOn;
+    }
+
+    public void playScoreSound() {
+        if (soundEffectsOn) {
+            gameScoreSound.play();
+        }
+    }
+
+    public void playGameOverSound() {
+        if (soundEffectsOn) {
+            gameOverSound.play();
+        }
     }
 
     private Mino pickMino() {
@@ -84,7 +138,7 @@ public class PlayManager {
 
     public void update() {
         if (gameOver) {
-            System.out.println("Game Over in update");
+            playGameOverSound();
             return;
         }
 
@@ -157,6 +211,7 @@ public class PlayManager {
     }
 
     private void finalizeLineDeletion() {
+        playScoreSound();
         int linesDeleted = effectY.size();  // Number of lines deleted at once
 
         for (Integer y : effectY) {
@@ -237,6 +292,7 @@ public class PlayManager {
                 g2.fillRect(left_x, yCoord, WIDTH, Block.SIZE);
             }
         }
+
 
         // Draw game over
         if (gameOver) {

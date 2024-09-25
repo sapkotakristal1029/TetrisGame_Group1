@@ -7,7 +7,9 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-     static ConfigurationScreen configurationScreen;
+
+     static ConfigurationScreen configScreen;
+    private static PlayManager playManager;
 
     // Key press states
     public static boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -17,9 +19,13 @@ public class KeyHandler implements KeyListener {
 
     // Setter for ConfigurationScreen reference
     public static void setConfigurationScreen(ConfigurationScreen screen) {
-        configurationScreen = screen;
+        configScreen = screen;
     }
 
+    // Setter for PlayManager reference
+    public static void setPlayManager(PlayManager manager) {
+        playManager = manager;
+    }
     @Override
     public void keyTyped(KeyEvent e) {
         // Not used
@@ -45,15 +51,25 @@ public class KeyHandler implements KeyListener {
             pausePressed = !pausePressed;
         }
         if (code == KeyEvent.VK_M) {
+            System.out.println("M is pressed");
+
             musicPressed = !musicPressed;
-            if (configurationScreen != null) {
-                configurationScreen.toggleMusic(); // Toggle music checkbox
+            if (configScreen != null) {
+                configScreen.toggleMusic(); // Toggle music checkbox
+            }
+
+            if (playManager != null) {
+                playManager.toggleMusic(); // Toggle music in play manager
             }
         }
         if (code == KeyEvent.VK_N) {
             soundPressed = !soundPressed;
-            if (configurationScreen != null) {
-                configurationScreen.toggleSound(); // Toggle sound effect checkbox
+            if (configScreen != null) {
+                configScreen.toggleSound(); // Toggle sound effect checkbox
+            }
+            if (playManager != null) {
+                System.out.println("hi");
+                playManager.toggleSoundEffects(); // Toggle sound effects in play manager
             }
         }
     }
