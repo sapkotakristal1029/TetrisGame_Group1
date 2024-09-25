@@ -14,7 +14,7 @@ public class PlayManager {
     public static int right_x;
     public static int top_y;
     public static int bottom_y;
-
+    private GamePanel gp;
     // MINO
     Mino currentMino;
     public int MINO_START_X;
@@ -84,6 +84,7 @@ public class PlayManager {
 
     public void update() {
         if (gameOver) {
+            System.out.println("Game Over in update");
             return;
         }
 
@@ -242,6 +243,8 @@ public class PlayManager {
             g2.setFont(new Font("Arial", Font.BOLD, 50));
             g2.setColor(Color.red);
             g2.drawString("Game Over", 540, 360);
+            System.out.println("Game Over in draw");
+
         }
 
         // Draw pause
@@ -280,5 +283,9 @@ public class PlayManager {
 
         nextMino = pickMino();
         nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
+    }
+
+    public int getScore() {
+        return score;
     }
 }

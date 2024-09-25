@@ -1,10 +1,14 @@
 package main.screens;
 
+import main.scoresRecord.Player;
+import main.scoresRecord.Scores;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class HighScoreScreen extends JPanel {
 
@@ -22,20 +26,10 @@ public class HighScoreScreen extends JPanel {
         titleLabel.setBorder(new EmptyBorder(10, 0, 10, 0)); // Add some padding around the title
         this.add(titleLabel, BorderLayout.NORTH);
 
+        List<Player> playerList = Scores.getTopScores(10); // 🔍 **Changed: Load top 10 scores using displayTopScores()**
         // Top 10 Scores List
         String[] columnNames = {"Player Name", "Score"};
-        Object[][] data = {
-                {"Player1", 1500},
-                {"Player3", 1400},
-                {"Player3", 1300},
-                {"Player4", 1200},
-                {"Player5", 1100},
-                {"Player6", 1000},
-                {"Player7", 900},
-                {"Player8", 800},
-                {"Player9", 700},
-                {"Player10", 600}
-        };
+        Object[][] data = convertListToTable(playerList);
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
             @Override
@@ -100,8 +94,15 @@ public class HighScoreScreen extends JPanel {
         JPanel spacer = new JPanel();
         spacer.setPreferredSize(new Dimension(0, 180));
         buttonPanel.add(spacer);
+    }
 
-
+    private Object[][] convertListToTable(List<Player> playerList){
+        Object[][]  data = new Object[playerList.size()][2];
+        for (int i = 0; i< playerList.size(); i++){
+            data[i][0] = playerList.get(i).getName();
+            data[i][1] = playerList.get(i).getScore();
+        }
+        return data;
     }
 
     private class BackButtonListener implements ActionListener {
