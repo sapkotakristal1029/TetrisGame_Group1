@@ -74,9 +74,9 @@ public class ConfigurationScreen extends JPanel {
         this.add(fieldWidthLabel, gbc);
         fieldWidthSlider.addChangeListener(e -> {
             int value = fieldWidthSlider.getValue();
-//            if (value % 2 != 0) { // If the value is odd, adjust it
-//                fieldWidthSlider.setValue(value - 1); // Set to the previous even number
-//            }
+            if (value % 2 != 0) { // If the value is odd, adjust it
+                fieldWidthSlider.setValue(value - 1); // Set to the previous even number
+            }
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthValue = fieldWidthSlider.getValue();
@@ -205,10 +205,6 @@ public class ConfigurationScreen extends JPanel {
     private void updateCheckBoxMusic(JCheckBox checkBox, boolean isSelected) {
         checkBox.setText(isSelected ? onText : offText);
     }
-
-    public static Sound gameStartSound;
-    public static Sound gameOverSound;
-    public static Sound gameScoreSound;
 
     public void toggleMusic() {
         boolean isSelected = !musicCheckBox.isSelected();
