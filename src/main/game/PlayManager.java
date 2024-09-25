@@ -13,6 +13,9 @@ public class PlayManager {
     public static Sound gameStartSound;
     public static Sound gameOverSound;
     public static Sound gameScoreSound;
+    public boolean musicPlaying = true; // Track music state
+    public boolean soundEffectsOn = true; // Track sound effects state
+
 
 
     public int WIDTH = ConfigurationScreen.fieldWidthValue * Block.SIZE;
@@ -53,6 +56,8 @@ public class PlayManager {
 
     public PlayManager() {
         initialize();
+        // Register the PlayManager in KeyHandler to allow key handling
+        KeyHandler.setPlayManager(this);
     }
 
     private void initialize() {
@@ -62,6 +67,7 @@ public class PlayManager {
 
         // Play the game start sound
         gameStartSound.play();
+        musicPlaying=true;
 
         System.out.println("GAme Started at "+WIDTH+","+HEIGHT);
         // Main Play Area Frame
@@ -79,6 +85,36 @@ public class PlayManager {
         // Initialize game state
         resetGame();
     }
+    public void toggleMusic() {
+        if (musicPlaying) {
+            gameStartSound.stop();
+        } else {
+            gameStartSound.play();
+        }
+        musicPlaying = !musicPlaying;
+    }
+
+    // Method to toggle sound effects
+    public void toggleSoundEffects() {
+        soundEffectsOn = !soundEffectsOn;
+        if (!soundEffectsOn) {
+            gameOverSound.stop();
+            gameScoreSound.stop();
+        }
+    }
+
+    public void playScoreSound() {
+        if (soundEffectsOn) {
+            gameScoreSound.play();
+        }
+    }
+
+    public void playGameOverSound() {
+        if (soundEffectsOn) {
+            gameOverSound.play();
+        }
+    }
+
 
     private Mino pickMino() {
         Mino mino = null;
@@ -252,6 +288,7 @@ public class PlayManager {
                 g2.fillRect(left_x, yCoord, WIDTH, Block.SIZE);
             }
         }
+
 
         // Draw game over
         if (gameOver) {

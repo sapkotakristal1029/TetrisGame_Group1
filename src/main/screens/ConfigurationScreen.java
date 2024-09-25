@@ -74,9 +74,9 @@ public class ConfigurationScreen extends JPanel {
         this.add(fieldWidthLabel, gbc);
         fieldWidthSlider.addChangeListener(e -> {
             int value = fieldWidthSlider.getValue();
-            if (value % 2 != 0) { // If the value is odd, adjust it
-                fieldWidthSlider.setValue(value - 1); // Set to the previous even number
-            }
+//            if (value % 2 != 0) { // If the value is odd, adjust it
+//                fieldWidthSlider.setValue(value - 1); // Set to the previous even number
+//            }
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthValue = fieldWidthSlider.getValue();
@@ -216,11 +216,7 @@ public class ConfigurationScreen extends JPanel {
         updateCheckBoxLabel(musicCheckBox);
 
         updateCheckBoxMusic(musicCheckBox, isSelected);
-        if(isSelected){
-            gameStartSound.play();
-        }else{
-            gameStartSound.stop();
-        }
+
     }
 
     public void toggleSound() {
@@ -228,13 +224,7 @@ public class ConfigurationScreen extends JPanel {
         soundEffectCheckBox.setSelected(isSelected);
         updateCheckBoxMusic(soundEffectCheckBox, isSelected);
         updateCheckBoxLabel(soundEffectCheckBox);
-        if(isSelected){
-            gameOverSound.play();
-            gameScoreSound.play();
-        }else{
-            gameOverSound.stop();
-            gameScoreSound.stop();
-        }
+
     }
 
     private static class CustomCheckBoxUI extends BasicCheckBoxUI {

@@ -9,6 +9,7 @@ public class KeyHandler implements KeyListener {
 
 
      static ConfigurationScreen configScreen;
+    private static PlayManager playManager;
 
     // Key press states
     public static boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -21,6 +22,10 @@ public class KeyHandler implements KeyListener {
         configScreen = screen;
     }
 
+    // Setter for PlayManager reference
+    public static void setPlayManager(PlayManager manager) {
+        playManager = manager;
+    }
     @Override
     public void keyTyped(KeyEvent e) {
         // Not used
@@ -52,11 +57,18 @@ public class KeyHandler implements KeyListener {
             if (configScreen != null) {
                 configScreen.toggleMusic(); // Toggle music checkbox
             }
+
+            if (playManager != null) {
+                playManager.toggleMusic(); // Toggle music in play manager
+            }
         }
         if (code == KeyEvent.VK_N) {
             soundPressed = !soundPressed;
             if (configScreen != null) {
                 configScreen.toggleSound(); // Toggle sound effect checkbox
+            }
+            if (playManager != null) {
+                playManager.toggleSoundEffects(); // Toggle sound effects in play manager
             }
         }
     }
