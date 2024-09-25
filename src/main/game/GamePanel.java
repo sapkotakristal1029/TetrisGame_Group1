@@ -98,8 +98,11 @@ public class GamePanel extends JPanel implements Runnable {
         if (!KeyHandler.pausePressed && !pm.gameOver && !backPressed) {
             pm.update();
         } else if (pm.gameOver) {
-            stopGame();
+            System.out.println("Game Over in GamePanel");
             saveScoreHandler();
+            System.out.println("Game Over in GamePanel. after save score");
+            stopGame(); //stopGame is bypassed!
+            System.out.println("Game Over in GamePanel. after stopgame");
         }
     }
 
@@ -153,8 +156,9 @@ public class GamePanel extends JPanel implements Runnable {
 
             //Do back directly if Game over is pressed
             if (pm.gameOver){
-                saveScoreHandler();
-                resetAndShowMainScreen();
+                System.out.println("gameover");
+//                saveScoreHandler();
+//                resetAndShowMainScreen();
             }else{
 
                 int option = JOptionPane.showConfirmDialog(
@@ -199,6 +203,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void saveScoreHandler() {
+        System.out.println("saveScoreHandler call");
         int score = pm.getScore();
         int lastScore = Scores.lastScore();
         List<Player> topPlayers = Scores.getTopScores();
