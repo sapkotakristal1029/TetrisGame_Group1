@@ -1,5 +1,6 @@
 package main.game;
 
+import main.Sound;
 import mino.*;
 
 import java.awt.*;
@@ -8,6 +9,12 @@ import java.util.Random;
 import main.screens.ConfigurationScreen;
 
 public class PlayManager {
+
+    public static Sound gameStartSound;
+    public static Sound gameOverSound;
+    public static Sound gameScoreSound;
+
+
     public int WIDTH = ConfigurationScreen.fieldWidthValue * Block.SIZE;
     public int HEIGHT = ConfigurationScreen.fieldHeightValue * Block.SIZE;
     public static int left_x;
@@ -49,6 +56,13 @@ public class PlayManager {
     }
 
     private void initialize() {
+        gameStartSound = new Sound("src/main/resources/MusicFiles/gameStart.wav");
+        gameOverSound = new Sound("src/main/resources/MusicFiles/gameOver.wav");
+        gameScoreSound = new Sound("src/main/resources/MusicFiles/gameScore.wav");
+
+        // Play the game start sound
+        gameStartSound.play();
+
         System.out.println("GAme Started at "+WIDTH+","+HEIGHT);
         // Main Play Area Frame
         left_x = (GamePanel.WIDTH / 4);
@@ -84,6 +98,7 @@ public class PlayManager {
 
     public void update() {
         if (gameOver) {
+            gameOverSound.play();
             return;
         }
 
@@ -156,6 +171,7 @@ public class PlayManager {
     }
 
     private void finalizeLineDeletion() {
+        gameScoreSound.play();
         int linesDeleted = effectY.size();  // Number of lines deleted at once
 
         for (Integer y : effectY) {

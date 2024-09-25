@@ -8,6 +8,7 @@ import java.util.Hashtable;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicCheckBoxUI;
 
+import main.Sound;
 import main.game.KeyHandler;
 
 public class ConfigurationScreen extends JPanel {
@@ -61,6 +62,7 @@ public class ConfigurationScreen extends JPanel {
         this.add(new JLabel("Field Width:"), gbc);
         fieldWidthSlider = new JSlider(6, 16, 10);
         fieldWidthSlider.setMajorTickSpacing(2);
+        fieldWidthSlider.setMinorTickSpacing(2);
         fieldWidthSlider.setPaintTicks(true);
         fieldWidthSlider.setPaintLabels(true);
         fieldWidthSlider.setLabelTable(createLabelTable(6, 16));
@@ -76,8 +78,8 @@ public class ConfigurationScreen extends JPanel {
                 fieldWidthSlider.setValue(value - 1); // Set to the previous even number
             }
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
-//            fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
-//            fieldWidthValue = fieldWidthSlider.getValue();
+            fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
+            fieldWidthValue = fieldWidthSlider.getValue();
 
         });
 
@@ -131,7 +133,7 @@ public class ConfigurationScreen extends JPanel {
         customizeCheckBox(musicCheckBox);
         gbc.gridx = 1;
         this.add(musicCheckBox, gbc);
-        musicCheckBox.addActionListener(e -> updateCheckBoxLabel(musicCheckBox));
+//        musicCheckBox.addActionListener(e -> updateCheckBoxLabel(musicCheckBox));
 
         // Sound Effect On/Off
         gbc.gridx = 0;
@@ -141,7 +143,7 @@ public class ConfigurationScreen extends JPanel {
         customizeCheckBox(soundEffectCheckBox);
         gbc.gridx = 1;
         this.add(soundEffectCheckBox, gbc);
-        soundEffectCheckBox.addActionListener(e -> updateCheckBoxLabel(soundEffectCheckBox));
+//        soundEffectCheckBox.addActionListener(e -> updateCheckBoxLabel(soundEffectCheckBox));
 
         // AI Play
         gbc.gridx = 0;
@@ -200,15 +202,39 @@ public class ConfigurationScreen extends JPanel {
     private void updateCheckBoxLabel(JCheckBox checkBox) {
         checkBox.setText(checkBox.isSelected() ? onText : offText);
     }
+    private void updateCheckBoxMusic(JCheckBox checkBox, boolean isSelected) {
+        checkBox.setText(isSelected ? onText : offText);
+    }
+
+    public static Sound gameStartSound;
+    public static Sound gameOverSound;
+    public static Sound gameScoreSound;
 
     public void toggleMusic() {
-        musicCheckBox.setSelected(!musicCheckBox.isSelected());
+        boolean isSelected = !musicCheckBox.isSelected();
+        musicCheckBox.setSelected(isSelected);
         updateCheckBoxLabel(musicCheckBox);
+
+        updateCheckBoxMusic(musicCheckBox, isSelected);
+        if(isSelected){
+            gameStartSound.play();
+        }else{
+            gameStartSound.stop();
+        }
     }
 
     public void toggleSound() {
-        soundEffectCheckBox.setSelected(!soundEffectCheckBox.isSelected());
+        boolean isSelected = !soundEffectCheckBox.isSelected();
+        soundEffectCheckBox.setSelected(isSelected);
+        updateCheckBoxMusic(soundEffectCheckBox, isSelected);
         updateCheckBoxLabel(soundEffectCheckBox);
+        if(isSelected){
+            gameOverSound.play();
+            gameScoreSound.play();
+        }else{
+            gameOverSound.stop();
+            gameScoreSound.stop();
+        }
     }
 
     private static class CustomCheckBoxUI extends BasicCheckBoxUI {

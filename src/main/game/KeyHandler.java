@@ -7,7 +7,8 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-     static ConfigurationScreen configurationScreen;
+
+     static ConfigurationScreen configScreen;
 
     // Key press states
     public static boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -17,7 +18,7 @@ public class KeyHandler implements KeyListener {
 
     // Setter for ConfigurationScreen reference
     public static void setConfigurationScreen(ConfigurationScreen screen) {
-        configurationScreen = screen;
+        configScreen = screen;
     }
 
     @Override
@@ -45,15 +46,17 @@ public class KeyHandler implements KeyListener {
             pausePressed = !pausePressed;
         }
         if (code == KeyEvent.VK_M) {
+            System.out.println("M is pressed");
+
             musicPressed = !musicPressed;
-            if (configurationScreen != null) {
-                configurationScreen.toggleMusic(); // Toggle music checkbox
+            if (configScreen != null) {
+                configScreen.toggleMusic(); // Toggle music checkbox
             }
         }
         if (code == KeyEvent.VK_N) {
             soundPressed = !soundPressed;
-            if (configurationScreen != null) {
-                configurationScreen.toggleSound(); // Toggle sound effect checkbox
+            if (configScreen != null) {
+                configScreen.toggleSound(); // Toggle sound effect checkbox
             }
         }
     }

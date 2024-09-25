@@ -1,12 +1,16 @@
 package main;
 
 import main.game.GamePanel;
+
 import main.screens.*;
 
 import javax.swing.*;
 import java.awt.*;
 
+
+
 public class Main {
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             // Create and show the splash screen
