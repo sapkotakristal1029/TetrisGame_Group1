@@ -68,6 +68,7 @@ public class KeyHandler implements KeyListener {
                 configScreen.toggleSound(); // Toggle sound effect checkbox
             }
             if (playManager != null) {
+                System.out.println("hi");
                 playManager.toggleSoundEffects(); // Toggle sound effects in play manager
             }
         }

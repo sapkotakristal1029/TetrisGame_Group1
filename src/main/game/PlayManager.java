@@ -10,7 +10,7 @@ import main.screens.ConfigurationScreen;
 
 public class PlayManager {
 
-    public static Boolean secondPlayerSelected = false;
+    public static Boolean secondPlayerSelected = true;
 
     public static Sound gameStartSound;
     public static Sound gameOverSound;
@@ -28,11 +28,6 @@ public class PlayManager {
     public static int bottom_y;
 
 
-    public static int left_x2;
-    public static int right_x2;
-    public static int top_y2;
-    public static int bottom_y2;
-
     // MINO
     Mino currentMino;
     public int MINO_START_X;
@@ -40,14 +35,6 @@ public class PlayManager {
     Mino nextMino;
     public int NEXTMINO_X;
     public int NEXTMINO_Y;
-
-    // MINO
-    Mino currentMino2;
-    public int MINO_START_X2;
-    public int MINO_START_Y2;
-    Mino nextMino2;
-    public int NEXTMINO_X2;
-    public int NEXTMINO_Y2;
 
 
     public static ArrayList<Block> staticBlocks = new ArrayList<>();
@@ -58,7 +45,6 @@ public class PlayManager {
 
     // Effect and Animation of deleting line
     boolean effectCounterOn;
-    int effectCounter;
     ArrayList<Integer> effectY = new ArrayList<>();
 
     // Score
@@ -72,9 +58,6 @@ public class PlayManager {
     private boolean isAnimating = false;
 
     public PlayManager() {
-        if (secondPlayerSelected){
-
-        }
         initialize();
         // Register the PlayManager in KeyHandler to allow key handling
         KeyHandler.setPlayManager(this);
@@ -116,11 +99,12 @@ public class PlayManager {
 
     // Method to toggle sound effects
     public void toggleSoundEffects() {
-        soundEffectsOn = !soundEffectsOn;
-        if (!soundEffectsOn) {
+
+        if (soundEffectsOn) {
             gameOverSound.stop();
             gameScoreSound.stop();
         }
+        soundEffectsOn = !soundEffectsOn;
     }
 
     public void playScoreSound() {
@@ -134,7 +118,6 @@ public class PlayManager {
             gameOverSound.play();
         }
     }
-
 
     private Mino pickMino() {
         Mino mino = null;
@@ -154,7 +137,7 @@ public class PlayManager {
 
     public void update() {
         if (gameOver) {
-            gameOverSound.play();
+            playGameOverSound();
             return;
         }
 
@@ -227,7 +210,7 @@ public class PlayManager {
     }
 
     private void finalizeLineDeletion() {
-        gameScoreSound.play();
+        playScoreSound();
         int linesDeleted = effectY.size();  // Number of lines deleted at once
 
         for (Integer y : effectY) {

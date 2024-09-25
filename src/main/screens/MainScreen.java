@@ -21,7 +21,7 @@ public class MainScreen extends JPanel {
         this.cardPanel = cardPanel;
 
         // Load the background image
-        backgroundImage = new ImageIcon("src/main/images/mainmenu.png").getImage();
+        backgroundImage = new ImageIcon("src/main/resources/images/mainmenu.png").getImage();
 
         this.setLayout(new BorderLayout());
 
