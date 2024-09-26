@@ -150,10 +150,12 @@ public class GamePanel extends JPanel implements Runnable {
             repaint();
 
 
+
             //Do back directly if Game over is pressed
             if (pm.gameOver){
-                saveScoreHandler();
+//                saveScoreHandler();
                 resetAndShowMainScreen();
+
             }else{
 
                 int option = JOptionPane.showConfirmDialog(

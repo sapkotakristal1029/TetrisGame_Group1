@@ -229,22 +229,23 @@ public class PlayManager {
         effectY.clear();
 
         // Update score based on the number of lines deleted at once
-        int multiplier = switch (linesDeleted) {
-            case 2 -> 2;
-            case 3 -> 3;
-            case 4 -> 4;
-            default -> 1;
+        int scoreIncrement = switch (linesDeleted) {
+            case 1 -> 100;
+            case 2 -> 300;
+            case 3 -> 600;
+            case 4 -> 1000;
+            default -> 0;
         };
 
-        int singleLineScore = 10;
-        score += singleLineScore * linesDeleted * multiplier;
+
+        score += scoreIncrement;
 
 
         // Update the total lines count
         lines += linesDeleted;
 
         // Update level and drop interval based on the rows deleted
-        level = Math.min(lines / 5+1, 10); // Increase level for every 50 points, up to level 10
+        level = Math.min((lines / 10) +1, 10); // Increase level for every 50 points, up to level 10
         dropInterval = Math.max(60 - (level - 1) * 6, 10); // Faster drop with higher levels, minimum interval of 10
     }
 
@@ -300,6 +301,7 @@ public class PlayManager {
             g2.setColor(Color.red);
             g2.drawString("Game Over", 540, 360);
             System.out.println("Game Over in draw");
+
 
         }
 
