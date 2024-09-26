@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -97,8 +98,11 @@ public class GamePanel extends JPanel implements Runnable {
         if (!KeyHandler.pausePressed && !pm.gameOver && !backPressed) {
             pm.update();
         } else if (pm.gameOver) {
-            stopGame();
+            System.out.println("Game Over in GamePanel");
             saveScoreHandler();
+            System.out.println("Game Over in GamePanel. after save score");
+            stopGame(); //stopGame is bypassed!
+            System.out.println("Game Over in GamePanel. after stopgame");
         }
     }
 
@@ -153,9 +157,15 @@ public class GamePanel extends JPanel implements Runnable {
 
             //Do back directly if Game over is pressed
             if (pm.gameOver){
+<<<<<<< HEAD
 //                saveScoreHandler();
                 resetAndShowMainScreen();
 
+=======
+                System.out.println("gameover");
+//                saveScoreHandler();
+//                resetAndShowMainScreen();
+>>>>>>> 23b80dfc671062934cd6021eb284f12aeb7e5449
             }else{
 
                 int option = JOptionPane.showConfirmDialog(
@@ -200,43 +210,63 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void saveScoreHandler() {
+        System.out.println("saveScoreHandler call");
         int score = pm.getScore();
-        if (score >= 0) {
-            System.out.println("saveScoreHandler called with score: " + score);
-            JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Game Over", true);
-            dialog.setSize(500, 500);
-            dialog.setLocationRelativeTo(this);
-            dialog.setLayout(new BorderLayout(10, 10));
+        int lastScore = Scores.lastScore();
+        List<Player> topPlayers = Scores.getTopScores();
+        if (topPlayers.size() < 10) {
+            saveDialog(score,topPlayers);
+        } else {
 
-            JLabel scoreLabel = new JLabel("Score: " + score, JLabel.CENTER);
-            JLabel messageLabel = new JLabel("Please enter your name:", JLabel.CENTER);
-            JTextField nameField = new JTextField();
-            JButton confirmButton = new JButton("Confirm");
-
-            dialog.add(scoreLabel, BorderLayout.NORTH);
-            dialog.add(messageLabel, BorderLayout.CENTER);
-            dialog.add(confirmButton, BorderLayout.SOUTH);
-            dialog.add(nameField, BorderLayout.CENTER);
-
-            dialog.pack();
-
-            confirmButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String playerName = nameField.getText().trim();
-                    if (playerName.isEmpty()) {
-                        JOptionPane.showMessageDialog(GamePanel.this, "Please enter your name.", "Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        Player player = new Player(playerName, pm.getScore());
-                        Scores.saveScore(player);
-                        dialog.dispose();
-                        resetAndShowMainScreen(); // Return to main screen after saving
-                    }
-                }
-            });
-            dialog.setVisible(true);
+            if (score > lastScore) {
+                saveDialog(score, topPlayers);
+            } else {
+                System.out.println("Score is not high enough to be in the top 10.");
+                resetAndShowMainScreen();
+            }
         }
+
     }
+
+    private void saveDialog(int score, List<Player> topPlayers) {
+        System.out.println("saveScoreHandler called with score: " + score);
+        JDialog dialog = new JDialog((Frame) SwingUtilities.getWindowAncestor(this), "Game Over", true);
+        dialog.setSize(500, 200);
+        dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout(10, 10));
+
+        JLabel scoreLabel = new JLabel("Score: " + score, JLabel.CENTER);
+        JLabel messageLabel = new JLabel("Please enter your name:", JLabel.CENTER);
+        JTextField nameField = new JTextField();
+        JButton confirmButton = new JButton("Confirm");
+
+        JPanel centerPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        centerPanel.add(messageLabel);
+        centerPanel.add(nameField);
+
+        dialog.add(scoreLabel, BorderLayout.NORTH);
+        dialog.add(centerPanel, BorderLayout.CENTER);
+        dialog.add(confirmButton, BorderLayout.SOUTH);
+
+        //dialog.pack();
+
+        confirmButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String playerName = nameField.getText().trim();
+                if (playerName.isEmpty()) {
+                    JOptionPane.showMessageDialog(GamePanel.this, "Please enter your name.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Player player = new Player(playerName, pm.getScore());
+                    Scores.saveScore(player);
+                    dialog.dispose();
+                    resetAndShowMainScreen(); // Return to main screen after saving
+                }
+            }
+        });
+        dialog.setVisible(true);
+    }
+
     private void resetAndShowMainScreen() {
         pm.resetGame(); // Clear game state
         cardPanel.remove(GamePanel.this);

@@ -13,6 +13,7 @@ import java.util.List;
 public class HighScoreScreen extends JPanel {
 
     private JButton backButton;
+    private DefaultTableModel model;
 
 
     public HighScoreScreen(CardLayout cardLayout, JPanel cardPanel) {
@@ -20,23 +21,17 @@ public class HighScoreScreen extends JPanel {
         this.setBackground(new Color(173, 216, 230));
 
         // Title Label
-        JLabel titleLabel = new JLabel("HIGH SCORE", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("TOP 10 SCORE", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.BLACK); // Title color
         titleLabel.setBorder(new EmptyBorder(10, 0, 10, 0)); // Add some padding around the title
         this.add(titleLabel, BorderLayout.NORTH);
 
-        List<Player> playerList = Scores.getTopScores(10); // 🔍 **Changed: Load top 10 scores using displayTopScores()**
+        List<Player> playerList = Scores.getTopScores();
         // Top 10 Scores List
         String[] columnNames = {"Player Name", "Score"};
-        Object[][] data = convertListToTable(playerList);
+        model = new DefaultTableModel(columnNames, 0); // Start with empty model
 
-        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Make the table non-editable
-            }
-        };
 
         JTable scoreTable = new JTable(model);
         scoreTable.setFillsViewportHeight(true);
@@ -96,6 +91,22 @@ public class HighScoreScreen extends JPanel {
         buttonPanel.add(spacer);
     }
 
+    @Override
+    public void setVisible(boolean aFlag) {
+        super.setVisible(aFlag);
+        if (aFlag) {
+            refreshScores();
+        }
+    }
+
+    private void refreshScores(){
+        List<Player> playerList = Scores.getTopScores();
+        model.setRowCount(0); // Clear existing rows in the table model
+        Object[][] data = convertListToTable(playerList);
+        for (Object[] row : data) {
+            model.addRow(row); // Add rows to the model
+        }
+    }
     private Object[][] convertListToTable(List<Player> playerList){
         Object[][]  data = new Object[playerList.size()][2];
         for (int i = 0; i< playerList.size(); i++){
