@@ -5,46 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExternalJar/gson-2.11.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TetrisGame_Group1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/scores.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/Sound.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/SplashScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/game/GamePanel$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/game/GamePanel$BackButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/game/GamePanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/game/KeyHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/game/PlayManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/resources/MusicFiles/gameOver.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/resources/MusicFiles/gameScore.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/resources/MusicFiles/gameStart.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/resources/images/mainmenu.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/resources/images/splash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/scoresRecord/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/scoresRecord/Scores$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/scoresRecord/Scores.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/ConfigurationScreen$BackButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/ConfigurationScreen$CustomCheckBoxUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/ConfigurationScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/HighScoreScreen$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/HighScoreScreen$BackButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/HighScoreScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/MainScreen$ConfigButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/MainScreen$ExitButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/MainScreen$HighScoresButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/MainScreen$PlayButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/main/screens/MainScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Block.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino_Bar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino_L1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino_Square.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino_T.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino_Z1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino_Z2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TetrisGame_Group1/mino/Mino_l2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +32,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Software Engineering/Asignment/TetrisJava"
+    "last_opened_file_path": "E:/Software Engineering/Asignment/TetrisGame_Group1"
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
@@ -80,7 +43,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
-      <module name="TetrisGame_Group1" />
+      <module name="TetrisGame" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.*" />
