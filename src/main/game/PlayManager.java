@@ -1,7 +1,6 @@
 package main.game;
 
 import main.Sound;
-import main.scoresRecord.Scores;
 import mino.*;
 
 import java.awt.*;
@@ -27,6 +26,7 @@ public class PlayManager {
     public static int right_x;
     public static int top_y;
     public static int bottom_y;
+
 
     // MINO
     Mino currentMino;
@@ -137,7 +137,6 @@ public class PlayManager {
 
     public void update() {
         if (gameOver) {
-            System.out.println("Game Over in PlayManager");
             playGameOverSound();
             return;
         }
@@ -229,23 +228,22 @@ public class PlayManager {
         effectY.clear();
 
         // Update score based on the number of lines deleted at once
-        int scoreIncrement = switch (linesDeleted) {
-            case 1 -> 100;
-            case 2 -> 300;
-            case 3 -> 600;
-            case 4 -> 1000;
-            default -> 0;
+        int multiplier = switch (linesDeleted) {
+            case 2 -> 2;
+            case 3 -> 3;
+            case 4 -> 4;
+            default -> 1;
         };
 
-
-        score += scoreIncrement;
+        int singleLineScore = 10;
+        score += singleLineScore * linesDeleted * multiplier;
 
 
         // Update the total lines count
         lines += linesDeleted;
 
         // Update level and drop interval based on the rows deleted
-        level = Math.min((lines / 10) +1, 10); // Increase level for every 50 points, up to level 10
+        level = Math.min(lines / 5+1, 10); // Increase level for every 50 points, up to level 10
         dropInterval = Math.max(60 - (level - 1) * 6, 10); // Faster drop with higher levels, minimum interval of 10
     }
 
@@ -277,7 +275,6 @@ public class PlayManager {
         }
 
         // Draw score frame
-        int lastScore = Scores.lastScore();
         g2.setColor(new Color(128, 0, 128)); // Purple color
         g2.drawRect(x, top_y, 150, 200);
         x += 25;
@@ -287,8 +284,6 @@ public class PlayManager {
         g2.drawString("LINES: " + lines, x, y);
         y += 60;
         g2.drawString("SCORE: " + score, x, y);
-        y += 20;
-        g2.drawString("BEAT: " + lastScore, x, y); // score to beat
 
         if (effectCounterOn) {
             g2.setColor(new Color(255, 0, 0, 255 - (animationStep * 10))); // Red with decreasing opacity
@@ -303,12 +298,6 @@ public class PlayManager {
             g2.setFont(new Font("Arial", Font.BOLD, 50));
             g2.setColor(Color.red);
             g2.drawString("Game Over", 540, 360);
-<<<<<<< HEAD
-            System.out.println("Game Over in draw");
-
-
-=======
->>>>>>> 23b80dfc671062934cd6021eb284f12aeb7e5449
         }
 
         // Draw pause
@@ -347,9 +336,5 @@ public class PlayManager {
 
         nextMino = pickMino();
         nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
-    }
-
-    public int getScore() {
-        return score;
     }
 }
