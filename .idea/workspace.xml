@@ -5,13 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/game/MinoFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mino/AbstractMino.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/game/MinoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/MinoFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/Mino.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino_Bar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino_Bar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino_L1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino_L1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino_Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino_Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino_T.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino_T.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino_Z1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino_Z1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino_Z2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino_Z2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Mino_l2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino_l2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -89,7 +107,7 @@
       <workItem from="1727355893681" duration="7662000" />
       <workItem from="1727410549634" duration="759000" />
       <workItem from="1727420127704" duration="30000" />
-      <workItem from="1727421542056" duration="2944000" />
+      <workItem from="1727421542056" duration="11683000" />
     </task>
     <servers />
   </component>

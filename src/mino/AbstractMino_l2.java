@@ -2,9 +2,9 @@ package mino;
 
 import java.awt.*;
 
-public class Mino_l2  extends Mino{
+public class AbstractMino_l2 extends AbstractMino {
 
-    public Mino_l2(){
+    public AbstractMino_l2(){
         create(Color.blue);
 
     }

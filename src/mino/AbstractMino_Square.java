@@ -2,8 +2,8 @@ package mino;
 
 import java.awt.*;
 
-public class Mino_Square extends Mino{
-    public  Mino_Square(){
+public class AbstractMino_Square extends AbstractMino {
+    public AbstractMino_Square(){
         create(Color.yellow);
 
     }

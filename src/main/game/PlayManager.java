@@ -5,7 +5,7 @@ import mino.*;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
+
 import main.screens.ConfigurationScreen;
 
 public class PlayManager {
@@ -29,10 +29,10 @@ public class PlayManager {
 
 
     // MINO
-    Mino currentMino;
+    AbstractMino currentAbstractMino;
     public int MINO_START_X;
     public int MINO_START_Y;
-    Mino nextMino;
+    AbstractMino nextAbstractMino;
     public int NEXTMINO_X;
     public int NEXTMINO_Y;
 
@@ -128,8 +128,7 @@ public class PlayManager {
         }
     }
 
-    private Mino pickMino() {
-
+    private AbstractMino pickMino() {
         return MinoFactory.createMino();
     }
 
@@ -140,25 +139,25 @@ public class PlayManager {
         }
 
         // Check if the correct mino is active
-        if (!currentMino.active) {
+        if (!currentAbstractMino.active) {
             // If not active, put it in the static blocks
-            staticBlocks.add(currentMino.b[0]);
-            staticBlocks.add(currentMino.b[1]);
-            staticBlocks.add(currentMino.b[2]);
-            staticBlocks.add(currentMino.b[3]);
+            staticBlocks.add(currentAbstractMino.b[0]);
+            staticBlocks.add(currentAbstractMino.b[1]);
+            staticBlocks.add(currentAbstractMino.b[2]);
+            staticBlocks.add(currentAbstractMino.b[3]);
 
             // Check if the game is over
-            if (currentMino.b[0].x == MINO_START_X && currentMino.b[0].y == MINO_START_Y) {
+            if (currentAbstractMino.b[0].x == MINO_START_X && currentAbstractMino.b[0].y == MINO_START_Y) {
                 gameOver = true;
             }
-            currentMino.deactivating = false;
+            currentAbstractMino.deactivating = false;
 
             // Replace the current mino with next mino
-            currentMino = nextMino;
-            currentMino.setXY(MINO_START_X, MINO_START_Y);
+            currentAbstractMino = nextAbstractMino;
+            currentAbstractMino.setXY(MINO_START_X, MINO_START_Y);
 
-            nextMino = pickMino();
-            nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
+            nextAbstractMino = pickMino();
+            nextAbstractMino.setXY(NEXTMINO_X, NEXTMINO_Y);
 
             // Check if the line is full and delete that line
             checkDelete();
@@ -172,7 +171,7 @@ public class PlayManager {
                 finalizeLineDeletion(); // Finalize the line deletion after the animation
             }
         } else {
-            currentMino.update();
+            currentAbstractMino.update();
         }
     }
 
@@ -260,12 +259,12 @@ public class PlayManager {
         g2.drawString("NEXT", x + 50, y + 60);
 
         // Draw the current mino
-        if (currentMino != null) {
-            currentMino.draw(g2);
+        if (currentAbstractMino != null) {
+            currentAbstractMino.draw(g2);
         }
 
         // Draw the next mino
-        nextMino.draw(g2);
+        nextAbstractMino.draw(g2);
 
         // Draw static blocks
         for (Block staticBlock : staticBlocks) {
@@ -329,11 +328,11 @@ public class PlayManager {
         }
 
         // Reinitialize the minos
-        currentMino = pickMino();
-        currentMino.setXY(MINO_START_X, MINO_START_Y);
+        currentAbstractMino = pickMino();
+        currentAbstractMino.setXY(MINO_START_X, MINO_START_Y);
 
-        nextMino = pickMino();
-        nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
+        nextAbstractMino = pickMino();
+        nextAbstractMino.setXY(NEXTMINO_X, NEXTMINO_Y);
     }
 }
 

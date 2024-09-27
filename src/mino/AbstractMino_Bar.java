@@ -2,8 +2,8 @@ package mino;
 
 import java.awt.*;
 
-public class Mino_Bar extends Mino {
-    public Mino_Bar(){
+public class AbstractMino_Bar extends AbstractMino {
+    public AbstractMino_Bar(){
         create(Color.cyan);
     }
 
