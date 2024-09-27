@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
         this.requestFocusInWindow(); // Ensure focus is set
 
-        pm = new PlayManager();
+        pm = PlayManager.getInstance();
 
         // Initialize and add back button
         backButton = new JButton("Back");

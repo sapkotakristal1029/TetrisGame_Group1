@@ -57,10 +57,19 @@ public class PlayManager {
     private int animationStep = 0;
     private boolean isAnimating = false;
 
-    public PlayManager() {
+    private static PlayManager instance;
+
+    private PlayManager() {
         initialize();
         // Register the PlayManager in KeyHandler to allow key handling
         KeyHandler.setPlayManager(this);
+    }
+
+    public static synchronized PlayManager getInstance() {
+        if (instance == null) {
+            instance = new PlayManager();
+        }
+        return instance;
     }
 
     private void initialize() {
@@ -338,3 +347,5 @@ public class PlayManager {
         nextMino.setXY(NEXTMINO_X, NEXTMINO_Y);
     }
 }
+
+
