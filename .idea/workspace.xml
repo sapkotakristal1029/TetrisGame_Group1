@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/game/MinoFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +89,7 @@
       <workItem from="1727355893681" duration="7662000" />
       <workItem from="1727410549634" duration="759000" />
       <workItem from="1727420127704" duration="30000" />
-      <workItem from="1727421542056" duration="2269000" />
+      <workItem from="1727421542056" duration="2944000" />
     </task>
     <servers />
   </component>

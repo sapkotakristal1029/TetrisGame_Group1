@@ -129,19 +129,8 @@ public class PlayManager {
     }
 
     private Mino pickMino() {
-        Mino mino = null;
-        int i = new Random().nextInt(7);
 
-        switch (i) {
-            case 0 -> mino = new Mino_L1();
-            case 1 -> mino = new Mino_l2();
-            case 2 -> mino = new Mino_Bar();
-            case 3 -> mino = new Mino_Square();
-            case 4 -> mino = new Mino_T();
-            case 5 -> mino = new Mino_Z1();
-            case 6 -> mino = new Mino_Z2();
-        }
-        return mino;
+        return MinoFactory.createMino();
     }
 
     public void update() {
