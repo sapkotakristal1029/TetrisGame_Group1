@@ -1,6 +1,7 @@
 package main.game;
 
 import main.Sound;
+import main.scoresRecord.Scores;
 import mino.*;
 
 import java.awt.*;
@@ -277,10 +278,14 @@ public class PlayManager {
         x += 25;
         y = top_y + 40;
         g2.drawString("LEVEL: " + level, x, y);
-        y += 60;
+        y += 40;
         g2.drawString("LINES: " + lines, x, y);
-        y += 60;
+        y += 40;
         g2.drawString("SCORE: " + score, x, y);
+        y += 40;
+        g2.drawString("Score", x, y);
+        y += 20;
+        g2.drawString("to beat: " + Scores.lastScore(), x, y);
 
         if (effectCounterOn) {
             g2.setColor(new Color(255, 0, 0, 255 - (animationStep * 10))); // Red with decreasing opacity

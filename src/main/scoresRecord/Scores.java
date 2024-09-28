@@ -92,6 +92,7 @@ public class Scores {
     }
 
     public static int lastScore(){
+        playerList = LoadScores();
         int listLen = playerList.size();
         return listLen == 0 ? 0 : playerList.get(listLen - 1).score();
     }
@@ -114,19 +115,18 @@ public class Scores {
 
     public static void main(String[] args) {
         // For testing, let's add some scores
-        saveScore(new Player("Alice", 150));
-        saveScore(new Player("Bob", 300));
-        saveScore(new Player("Charlie", 200));
-        saveScore(new Player("Dan", 100));
-        saveScore(new Player("Eve", 100));
-        saveScore(new Player("Fred", 100));
-        saveScore(new Player("George", 100));
-        saveScore(new Player("Harry", 100));
-        saveScore(new Player("Jack", 100));
+//        saveScore(new Player("Alice", 150));
+//        saveScore(new Player("Bob", 300));
+//        saveScore(new Player("Charlie", 200));
+//        saveScore(new Player("Dan", 100));
+//        saveScore(new Player("Eve", 100));
+//        saveScore(new Player("Fred", 100));
+//        saveScore(new Player("George", 100));
+//        saveScore(new Player("Harry", 100));
+//        saveScore(new Player("Jack", 100));
         System.out.println(lastScore());
-
         // Display top 30 scores
-        displayTopScores(10);
+        displayTopScores(20);
         List<Player> topPlayers = getScores();
         System.out.println("Top Players List: " + topPlayers);
         if (have10()) {
