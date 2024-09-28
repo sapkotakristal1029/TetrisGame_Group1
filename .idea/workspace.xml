@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/scoresRecord/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TetrisGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TetrisGame.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/database/scores.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scoresRecord/Scores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scoresRecord/Scores.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mino/AbstractMino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +65,7 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Scores">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="TetrisGame" />
@@ -96,8 +94,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Scores" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -126,7 +124,7 @@
       <workItem from="1727355893681" duration="7662000" />
       <workItem from="1727410549634" duration="759000" />
       <workItem from="1727420127704" duration="30000" />
-      <workItem from="1727421542056" duration="25917000" />
+      <workItem from="1727421542056" duration="28592000" />
     </task>
     <servers />
   </component>

@@ -13,6 +13,7 @@ import java.util.List;
 public class HighScoreScreen extends JPanel {
 
     private JButton backButton;
+    private JButton clearButton;
     String[] columnNames = {"Player Name", "Score"};
     DefaultTableModel model = new DefaultTableModel(columnNames,0);
 
@@ -115,15 +116,40 @@ public class HighScoreScreen extends JPanel {
         backButton.setFocusPainted(false);
         backButton.setPreferredSize(new Dimension(150, 30)); // Smaller button size
 
+        //Clear Button
+        clearButton = new JButton("Clear List");
+        clearButton.setFont(new Font("Arial", Font.PLAIN, 12));
+        clearButton.setBackground(Color.RED);
+        clearButton.setForeground(Color.BLACK);
+        clearButton.setFocusPainted(false);
+        clearButton.setPreferredSize(new Dimension(300, 30));
+
         // Panel to hold the back button
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setBackground(new Color(173, 216, 230));
+        buttonPanel.add(clearButton);
         buttonPanel.add(backButton);
 
         backButton.addActionListener(new BackButtonListener(cardLayout, cardPanel));
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(
+                        HighScoreScreen.this,
+                        "Delete all records in TOP10 List?",
+                        "Clear",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.NO_OPTION
+                );
+                if (option == JOptionPane.YES_OPTION) {
+                    model.setRowCount(0);
+                    Scores.clearList();
+                }
+            }
+        });
         this.add(buttonPanel, BorderLayout.SOUTH);
-        backButton.setBackground(Color.DARK_GRAY);
-        backButton.setForeground(Color.WHITE);
+//        backButton.setBackground(Color.DARK_GRAY);
+//        backButton.setForeground(Color.WHITE);
 
         //Space after the back
         JPanel spacer = new JPanel();

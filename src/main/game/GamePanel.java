@@ -134,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void saveScoreDialog() {
-        if (!Scores.have10()) {
+        if (!Scores.have10() || (pm.score>Scores.lastScore())) {
             JDialog dialog = new JDialog();
             dialog.setTitle("Save Your Score");
             dialog.setSize(500, 200);
