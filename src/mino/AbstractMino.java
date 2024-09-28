@@ -6,21 +6,14 @@ import main.game.PlayManager;
 import java.awt.*;
 
 public abstract class AbstractMino implements Mino {
-
     public Block[] b = new Block[4];
     public Block[] tempB = new Block[4];
-
     boolean leftCollision, rightCollision, bottomCollision;
-
-
     int autoDropCounter = 0;
     public int direction = 1; //Four Directions (1,2,3,4)
-
     public boolean active = true;
-
     public boolean deactivating;
     int deactivateCounter = 0;
-
 
     public void create (Color c){
         b[0] = new Block(c);
@@ -162,9 +155,6 @@ public abstract class AbstractMino implements Mino {
         }
     }
 
-
-
-
     public void update(){
 
         if(deactivating){
@@ -287,6 +277,4 @@ public abstract class AbstractMino implements Mino {
         g2.fillRect(b[3].x+margin, b[3].y+margin, Block.SIZE-(2*margin), Block.SIZE-(2*margin));
 
     }
-
-
 }

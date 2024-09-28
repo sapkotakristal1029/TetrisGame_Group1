@@ -1,48 +1,77 @@
 package main.screens;
 
+import main.scoresRecord.Player;
+import main.scoresRecord.Scores;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class HighScoreScreen extends JPanel {
 
     private JButton backButton;
+    String[] columnNames = {"Player Name", "Score"};
+    DefaultTableModel model = new DefaultTableModel(columnNames,0);
 
+    @Override
+    public void setVisible(boolean aFlag) {
+        super.setVisible(aFlag);
+        if (aFlag) {
+            refreshScores();
+        }
+    }
 
+    private void refreshScores(){
+        java.util.List<Player> playerList = Scores.getScores();
+        model.setRowCount(0); // Clear existing rows in the table model
+        Object[][] data = convertListToTable(playerList);
+        for (Object[] row : data) {
+            model.addRow(row); // Add rows to the model
+        }
+    }
+    private Object[][] convertListToTable(List<Player> playerList){
+        Object[][]  data = new Object[playerList.size()][2];
+        for (int i = 0; i< playerList.size(); i++){
+            data[i][0] = playerList.get(i).name();
+            data[i][1] = playerList.get(i).score();
+        }
+        return data;
+    }
     public HighScoreScreen(CardLayout cardLayout, JPanel cardPanel) {
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(173, 216, 230));
 
         // Title Label
-        JLabel titleLabel = new JLabel("HIGH SCORE", JLabel.CENTER);
+        JLabel titleLabel = new JLabel("TOP 10 SCORE", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.BLACK); // Title color
         titleLabel.setBorder(new EmptyBorder(10, 0, 10, 0)); // Add some padding around the title
         this.add(titleLabel, BorderLayout.NORTH);
 
         // Top 10 Scores List
-        String[] columnNames = {"Player Name", "Score"};
-        Object[][] data = {
-                {"Player1", 1500},
-                {"Player3", 1400},
-                {"Player3", 1300},
-                {"Player4", 1200},
-                {"Player5", 1100},
-                {"Player6", 1000},
-                {"Player7", 900},
-                {"Player8", 800},
-                {"Player9", 700},
-                {"Player10", 600}
-        };
+//        String[] columnNames = {"Player Name", "Score"};
+//        Object[][] data = {
+//                {"Player1", 1500},
+//                {"Player3", 1400},
+//                {"Player3", 1300},
+//                {"Player4", 1200},
+//                {"Player5", 1100},
+//                {"Player6", 1000},
+//                {"Player7", 900},
+//                {"Player8", 800},
+//                {"Player9", 700},
+//                {"Player10", 600}
+//        };
 
-        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Make the table non-editable
-            }
-        };
+//        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                return false; // Make the table non-editable
+//            }
+//        };
 
         JTable scoreTable = new JTable(model);
         scoreTable.setFillsViewportHeight(true);

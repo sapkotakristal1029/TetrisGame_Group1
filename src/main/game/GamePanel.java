@@ -1,10 +1,14 @@
 package main.game;
 
+import main.scoresRecord.Player;
+import main.scoresRecord.Scores;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -46,9 +50,6 @@ public class GamePanel extends JPanel implements Runnable {
         backButton.setForeground(Color.white);
         backButton.addActionListener(new BackButtonListener());
         this.add(backButton);
-
-
-
     }
 
     // Start or resume the game
@@ -92,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (!KeyHandler.pausePressed && !pm.gameOver && !backPressed) {
+        if (!KeyHandler.pausePressed && !backPressed) {
             pm.update();
         }
     }
@@ -132,6 +133,65 @@ public class GamePanel extends JPanel implements Runnable {
         requestFocusInWindow(); // Request focus after adding to the container
     }
 
+    private void saveScoreDialog() {
+        if (!Scores.have10()) {
+            JDialog dialog = new JDialog();
+            dialog.setTitle("Save Your Score");
+            dialog.setSize(500, 200);
+            dialog.setLocationRelativeTo(this);
+            dialog.setLayout(new BorderLayout(10, 10));
+
+            JLabel scoreLabel = new JLabel("Score: " + pm.score);
+            scoreLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+            JLabel nameLabel = new JLabel("Please enter your name: ");
+            nameLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+            JTextField nameField = new JTextField();
+            nameField.setFont(new Font("SansSerif", Font.BOLD, 20));
+            JButton Button = new JButton("Submit");
+
+            JPanel centerPanel = new JPanel(new GridLayout(2, 1));
+            centerPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            centerPanel.add(nameLabel);
+            centerPanel.add(nameField);
+
+            dialog.add(scoreLabel, BorderLayout.NORTH);
+            dialog.add(centerPanel, BorderLayout.CENTER);
+            dialog.add(Button, BorderLayout.SOUTH);
+
+            dialog.setVisible(true);
+            Button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String name = nameField.getText().trim();
+                    if (name.isEmpty()) {
+                        JOptionPane.showMessageDialog(GamePanel.this, "Please enter your name.");
+                    } else {
+                        Player player = new Player(name, pm.score);
+                        Scores.saveScore(player);
+                        dialog.dispose();
+                        resetAndShowMainScreen();
+                    }
+
+                }
+            });
+        } else {
+        resetAndShowMainScreen();}
+    }
+    private void resetAndShowMainScreen() {
+
+        // Clear static blocks
+        pm.resetGame();
+
+        // Switch to the MainScreen
+        cardPanel.remove(GamePanel.this);
+        cardLayout.show(cardPanel, "MainScreen");
+
+        //Unpause game if paused
+        if(KeyHandler.pausePressed){
+            KeyHandler.pausePressed= false;
+        }
+    }
+
     // Inner class to handle back button clicks
     private class BackButtonListener implements ActionListener {
 
@@ -147,7 +207,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             //Do back directly if Game over is pressed
             if (pm.gameOver){
-                resetAndShowMainScreen();
+                saveScoreDialog();
+//                resetAndShowMainScreen();
             }else{
 
                 int option = JOptionPane.showConfirmDialog(
@@ -159,7 +220,8 @@ public class GamePanel extends JPanel implements Runnable {
                 );
 
                 if (option == JOptionPane.YES_OPTION) {
-                    resetAndShowMainScreen();
+                    saveScoreDialog();
+//                    resetAndShowMainScreen();
                 } else if (option == JOptionPane.NO_OPTION) {
                     // Resume the game if it was paused
                     if (!running) {
@@ -174,6 +236,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
 
+/*
         private void resetAndShowMainScreen() {
 
             // Clear static blocks
@@ -188,5 +251,6 @@ public class GamePanel extends JPanel implements Runnable {
                 KeyHandler.pausePressed= false;
             }
         }
+*/
     }
 }
