@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
 
 
-     static ConfigurationScreen configScreen;
+    static ConfigurationScreen configScreen;
     private static PlayManager playManager;
 
     // Key press states

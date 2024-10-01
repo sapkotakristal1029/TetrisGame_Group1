@@ -45,6 +45,8 @@ public class HighScoreScreen extends JPanel {
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(173, 216, 230));
 
+        this.setPreferredSize(new Dimension(1000, 700));
+
         // Title Label
         JLabel titleLabel = new JLabel("TOP 10 SCORE", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));

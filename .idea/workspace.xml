@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/database/scores.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/GameFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/game/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/KeyHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/screens/ConfigurationScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/ConfigurationScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/screens/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/MainScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mino/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/Block.java" afterDir="false" />
     </list>
@@ -124,16 +128,5 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/game/PlayManager.java</url>
-          <line>277</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

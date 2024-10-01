@@ -2,8 +2,6 @@ package main.screens;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import main.game.GamePanel;
 
 public class MainScreen extends JPanel {
@@ -31,11 +29,11 @@ public class MainScreen extends JPanel {
         highScoresButton = createStyledButton("High Scores");
         exitButton = createStyledButton("Exit");
 
-        // Add Action Listeners
-        playButton.addActionListener(new PlayButtonListener());
-        configButton.addActionListener(new ConfigButtonListener());
-        highScoresButton.addActionListener(new HighScoresButtonListener());
-        exitButton.addActionListener(new ExitButtonListener());
+        // Add Action Listeners using lambda expressions
+        playButton.addActionListener(e -> startGame());
+        configButton.addActionListener(e -> cardLayout.show(cardPanel, "ConfigurationScreen"));
+        highScoresButton.addActionListener(e -> cardLayout.show(cardPanel, "HighScoreScreen"));
+        exitButton.addActionListener(e -> confirmExit());
 
         // Create Panel for Buttons
         JPanel buttonPanel = new JPanel();
@@ -60,7 +58,7 @@ public class MainScreen extends JPanel {
         this.add(buttonPanel, BorderLayout.CENTER);
 
         // Set Main Screen properties
-        this.setPreferredSize(new Dimension(1200, 720));
+        this.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
     }
 
     // Override the paintComponent method to draw the background image
@@ -85,44 +83,26 @@ public class MainScreen extends JPanel {
         return button;
     }
 
-    private class PlayButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            GamePanel gamePanel = new GamePanel(cardLayout, cardPanel); // Pass the parameters
-            cardPanel.add(gamePanel, "GamePanel");;
-            cardLayout.show(cardPanel, "GamePanel");
-            gamePanel.startGame();
-        }
+    // Method to start the game
+    private void startGame() {
+        GamePanel gamePanel = new GamePanel(cardLayout, cardPanel); // Pass the parameters
+        cardPanel.add(gamePanel, "GamePanel");
+        cardLayout.show(cardPanel, "GamePanel");
+        gamePanel.startGame();
     }
 
-    private class ConfigButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            cardLayout.show(cardPanel, "ConfigurationScreen");
-        }
-    }
+    // Method to confirm exit using lambda expression
+    private void confirmExit() {
+        int option = JOptionPane.showConfirmDialog(
+                MainScreen.this,
+                "Are you sure you want to exit?",
+                "Confirm Exit",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
 
-    private class HighScoresButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            cardLayout.show(cardPanel, "HighScoreScreen");
-        }
-    }
-
-    private class ExitButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int option = JOptionPane.showConfirmDialog(
-                    MainScreen.this,
-                    "Are you sure you want to exit?",
-                    "Confirm Exit",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE
-            );
-
-            if (option == JOptionPane.YES_OPTION) {
-                System.exit(0);
-            }
+        if (option == JOptionPane.YES_OPTION) {
+            System.exit(0);
         }
     }
 }

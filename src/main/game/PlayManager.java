@@ -2,12 +2,13 @@ package main.game;
 
 import main.Sound;
 import main.scoresRecord.Scores;
-import mino.*;
+import mino.AbstractMino;
+import mino.Block;
+import mino.MinoFactory;
+import main.screens.ConfigurationScreen;
 
 import java.awt.*;
 import java.util.ArrayList;
-
-import main.screens.ConfigurationScreen;
 
 public class PlayManager {
 
@@ -19,15 +20,13 @@ public class PlayManager {
     public boolean musicPlaying = true; // Track music state
     public boolean soundEffectsOn = true; // Track sound effects state
 
-
-
     public int WIDTH = ConfigurationScreen.fieldWidthValue * Block.SIZE;
     public int HEIGHT = ConfigurationScreen.fieldHeightValue * Block.SIZE;
+
     public static int left_x;
     public static int right_x;
     public static int top_y;
     public static int bottom_y;
-
 
     // MINO
     AbstractMino currentAbstractMino;
@@ -36,7 +35,6 @@ public class PlayManager {
     AbstractMino nextAbstractMino;
     public int NEXTMINO_X;
     public int NEXTMINO_Y;
-
 
     public static ArrayList<Block> staticBlocks = new ArrayList<>();
 
@@ -64,6 +62,7 @@ public class PlayManager {
         initialize();
         // Register the PlayManager in KeyHandler to allow key handling
         KeyHandler.setPlayManager(this);
+        ConfigurationScreen.setPlayManager(this);
     }
 
     public static synchronized PlayManager getInstance() {
@@ -80,24 +79,50 @@ public class PlayManager {
 
         // Play the game start sound
         gameStartSound.play();
-        musicPlaying=true;
+        musicPlaying = true;
 
-        System.out.println("GAme Started at "+WIDTH+","+HEIGHT);
+        System.out.println("Game Started at " + WIDTH + "," + HEIGHT);
         // Main Play Area Frame
         left_x = (GamePanel.WIDTH / 2) - (WIDTH / 2);
         right_x = left_x + WIDTH;
         top_y = 50;
         bottom_y = top_y + HEIGHT;
 
-        MINO_START_X = left_x + (WIDTH / 2)- Block.SIZE;
+        MINO_START_X = left_x + (WIDTH / 2) - Block.SIZE;
         MINO_START_Y = top_y + Block.SIZE;
 
-        NEXTMINO_X = right_x + 100;
+        NEXTMINO_X = right_x + 105;
         NEXTMINO_Y = top_y + 300;
 
         // Initialize game state
         resetGame();
     }
+
+    // New method to update field size dynamically
+    public void refreshFieldSize() {
+        // Update field dimensions using the configuration values
+        this.WIDTH = ConfigurationScreen.fieldWidthValue * Block.SIZE;
+        this.HEIGHT = ConfigurationScreen.fieldHeightValue * Block.SIZE;
+
+        // Update boundary positions
+        left_x = (GamePanel.WIDTH / 2) - (WIDTH / 2);
+        right_x = left_x + WIDTH;
+        top_y = 50;
+        bottom_y = top_y + HEIGHT;
+
+        // Update the starting positions of the minos
+        MINO_START_X = left_x + (WIDTH / 2) - Block.SIZE;
+        MINO_START_Y = top_y + Block.SIZE;
+
+        NEXTMINO_X = right_x + 105;
+        NEXTMINO_Y = top_y + 300;
+
+        System.out.println("Field size updated to: " + ConfigurationScreen.fieldWidthValue + "x" + ConfigurationScreen.fieldHeightValue);
+
+        // Reset the game to apply the new size
+        resetGame();
+    }
+
     public void toggleMusic() {
         if (musicPlaying) {
             gameStartSound.stop();
@@ -109,7 +134,6 @@ public class PlayManager {
 
     // Method to toggle sound effects
     public void toggleSoundEffects() {
-
         if (soundEffectsOn) {
             gameOverSound.stop();
             gameScoreSound.stop();
@@ -190,7 +214,7 @@ public class PlayManager {
             x += Block.SIZE;
 
             if (x == right_x) {
-                if (blockCount == WIDTH/Block.SIZE) {
+                if (blockCount == WIDTH / Block.SIZE) {
                     effectCounterOn = true;
                     effectY.add(y);
                     startAnimation(); // Start the fade-out animation
@@ -236,7 +260,6 @@ public class PlayManager {
 
         score += scoreIncrement;
 
-
         // Update the total lines count
         lines += linesDeleted;
 
@@ -254,10 +277,10 @@ public class PlayManager {
         int x = right_x + 50;
         int y = top_y + 200;
         g2.setColor(new Color(128, 0, 128)); // Purple color
-        g2.drawRect(x, y, 150, 175);
+        g2.drawRect(x, y, 170, 175);
         g2.setFont(new Font("Arial", Font.PLAIN, 20));
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.drawString("NEXT", x + 50, y + 60);
+        g2.drawString("NEXT", x + 50, y + 40);
 
         // Draw the current mino
         if (currentAbstractMino != null) {
@@ -274,17 +297,21 @@ public class PlayManager {
 
         // Draw score frame
         g2.setColor(new Color(128, 0, 128)); // Purple color
-        g2.drawRect(x, top_y, 150, 200);
+        g2.drawRect(x, top_y, 170, 200);
         x += 25;
-        y = top_y + 40;
+        y = top_y + 30;
+        g2.setFont(new Font("Arial", Font.PLAIN, 16));
+        g2.drawString("START LEVEL: " + ConfigurationScreen.gameLevelValue, x, y);
+        y += 30;
         g2.drawString("LEVEL: " + level, x, y);
-        y += 40;
+        y += 30;
+
         g2.drawString("LINES: " + lines, x, y);
-        y += 40;
+        y += 30;
         g2.drawString("SCORE: " + score, x, y);
-        y += 40;
+        y += 30;
         g2.drawString("Score", x, y);
-        y += 20;
+        y += 15;
         g2.drawString("to beat: " + Scores.lastScore(), x, y);
 
         if (effectCounterOn) {
@@ -293,7 +320,6 @@ public class PlayManager {
                 g2.fillRect(left_x, yCoord, WIDTH, Block.SIZE);
             }
         }
-
 
         // Draw game over
         if (gameOver) {
@@ -327,9 +353,9 @@ public class PlayManager {
         animationStep = 0;
         gameOver = false;
 
-        //Unpause game if paused
-        if(KeyHandler.pausePressed){
-            KeyHandler.pausePressed= false;
+        // Unpause game if paused
+        if (KeyHandler.pausePressed) {
+            KeyHandler.pausePressed = false;
         }
 
         // Reinitialize the minos
@@ -340,5 +366,3 @@ public class PlayManager {
         nextAbstractMino.setXY(NEXTMINO_X, NEXTMINO_Y);
     }
 }
-
-

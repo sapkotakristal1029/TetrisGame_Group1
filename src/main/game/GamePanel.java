@@ -6,14 +6,13 @@ import main.scoresRecord.Scores;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    public static final int WIDTH = 1200;
-    public static final int HEIGHT = 720;
+    public static final int WIDTH = 1300;
+    public static final int HEIGHT = 850;
 
     private static final int FPS = 60; // Frames per second
     private Thread gameThread;
@@ -22,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     private JButton backButton; // Add back button
     private CardLayout cardLayout;
     private JPanel cardPanel;
-
+    private ExecutorService executorService; // ExecutorService for managing threads
 
     private boolean backPressed = false; // Flag to track if back button is pressed
 
@@ -45,11 +44,15 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Initialize and add back button
         backButton = new JButton("Back");
-        backButton.setBounds(600, 670, 100, 30);
+        backButton.setBounds(1200, 820, 100, 30);
         backButton.setBackground(Color.DARK_GRAY);
         backButton.setForeground(Color.white);
-        backButton.addActionListener(new BackButtonListener());
+        // Replace ActionListener with lambda expression
+        backButton.addActionListener(e -> handleBackButtonClick());
         this.add(backButton);
+
+        // Initialize ExecutorService with a fixed thread pool
+        executorService = Executors.newFixedThreadPool(2);
     }
 
     // Start or resume the game
@@ -66,6 +69,10 @@ public class GamePanel extends JPanel implements Runnable {
         try {
             if (gameThread != null) {
                 gameThread.join();
+            }
+            // Shut down executor service when game is stopped
+            if (executorService != null) {
+                executorService.shutdown();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -85,7 +92,8 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                update();
+                // Offload heavy game updates to the executor service
+                executorService.submit(() -> update());
                 repaint();
                 delta--;
             }
@@ -114,8 +122,6 @@ public class GamePanel extends JPanel implements Runnable {
         g2.drawString("TETRIS", 50, 350);
         g2.drawString("GAME", 75, 450);
 
-
-
         // Draw game elements
         pm.draw(g2);
 
@@ -134,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void saveScoreDialog() {
-        if (!Scores.have10() || (pm.score>Scores.lastScore())) {
+        if (!Scores.have10() || (pm.score > Scores.lastScore())) {
             JDialog dialog = new JDialog();
             dialog.setTitle("Save Your Score");
             dialog.setSize(500, 200);
@@ -159,26 +165,24 @@ public class GamePanel extends JPanel implements Runnable {
             dialog.add(Button, BorderLayout.SOUTH);
 
             dialog.setVisible(true);
-            Button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String name = nameField.getText().trim();
-                    if (name.isEmpty()) {
-                        JOptionPane.showMessageDialog(GamePanel.this, "Please enter your name.");
-                    } else {
-                        Player player = new Player(name, pm.score);
-                        Scores.saveScore(player);
-                        dialog.dispose();
-                        resetAndShowMainScreen();
-                    }
-
+            // Use lambda expression for button action listener
+            Button.addActionListener(e -> {
+                String name = nameField.getText().trim();
+                if (name.isEmpty()) {
+                    JOptionPane.showMessageDialog(GamePanel.this, "Please enter your name.");
+                } else {
+                    Player player = new Player(name, pm.score);
+                    Scores.saveScore(player);
+                    dialog.dispose();
+                    resetAndShowMainScreen();
                 }
             });
         } else {
-        resetAndShowMainScreen();}
+            resetAndShowMainScreen();
+        }
     }
-    private void resetAndShowMainScreen() {
 
+    private void resetAndShowMainScreen() {
         // Clear static blocks
         pm.resetGame();
 
@@ -186,71 +190,43 @@ public class GamePanel extends JPanel implements Runnable {
         cardPanel.remove(GamePanel.this);
         cardLayout.show(cardPanel, "MainScreen");
 
-        //Unpause game if paused
-        if(KeyHandler.pausePressed){
-            KeyHandler.pausePressed= false;
+        // Unpause game if paused
+        if (KeyHandler.pausePressed) {
+            KeyHandler.pausePressed = false;
         }
     }
 
-    // Inner class to handle back button clicks
-    private class BackButtonListener implements ActionListener {
+    // Method to handle back button click using lambda expression
+    private void handleBackButtonClick() {
+        // Stop the game to pause it
+        stopGame();
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // Stop the game to pause it
-            stopGame();
+        // Set the backPressed flag to true and repaint the screen
+        backPressed = true;
+        repaint();
 
-            // Set the backPressed flag to true and repaint the screen
-            backPressed = true;
-            repaint();
+        // If game is over, save score directly
+        if (pm.gameOver) {
+            saveScoreDialog();
+        } else {
+            int option = JOptionPane.showConfirmDialog(
+                    GamePanel.this,
+                    "Do you want to go back? This will forfeit the current game.",
+                    "Confirm Back",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
 
-
-            //Do back directly if Game over is pressed
-            if (pm.gameOver){
+            if (option == JOptionPane.YES_OPTION) {
                 saveScoreDialog();
-//                resetAndShowMainScreen();
-            }else{
-
-                int option = JOptionPane.showConfirmDialog(
-                        GamePanel.this,
-                        "Do you want to go back? This will forfeit the current game.",
-                        "Confirm Back",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.WARNING_MESSAGE
-                );
-
-                if (option == JOptionPane.YES_OPTION) {
-                    saveScoreDialog();
-//                    resetAndShowMainScreen();
-                } else if (option == JOptionPane.NO_OPTION) {
-                    // Resume the game if it was paused
-                    if (!running) {
-                        backPressed = false; // Reset the flag
-                        startGame();
-                        requestFocusInWindow(); // Request focus back to the game panel
-                    }
+            } else if (option == JOptionPane.NO_OPTION) {
+                // Resume the game if it was paused
+                if (!running) {
+                    backPressed = false; // Reset the flag
+                    startGame();
+                    requestFocusInWindow(); // Request focus back to the game panel
                 }
-
-            }
-
-
-        }
-
-/*
-        private void resetAndShowMainScreen() {
-
-            // Clear static blocks
-            pm.resetGame();
-
-            // Switch to the MainScreen
-            cardPanel.remove(GamePanel.this);
-            cardLayout.show(cardPanel, "MainScreen");
-
-            //Unpause game if paused
-            if(KeyHandler.pausePressed){
-                KeyHandler.pausePressed= false;
             }
         }
-*/
     }
 }

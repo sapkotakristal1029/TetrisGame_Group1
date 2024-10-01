@@ -10,8 +10,10 @@ import javax.swing.plaf.basic.BasicCheckBoxUI;
 
 import main.Sound;
 import main.game.KeyHandler;
+import main.game.PlayManager;
 
 public class ConfigurationScreen extends JPanel {
+    static PlayManager playManager;
 
     public static int fieldWidthValue = 10;
     public static int fieldHeightValue = 20;
@@ -29,12 +31,20 @@ public class ConfigurationScreen extends JPanel {
     private JCheckBox extendModeCheckBox;
     private JButton backButton;
 
+    boolean isSoundSelected = true;
+    boolean isMusicSelected = true;
+
+
     String spaces = " ".repeat(100);
     String space1 = " ".repeat(25);
     String onText = spaces + "On";
     String offText = spaces + "Off";
     String labelText = space1 + "Configuration";
     Color softBlue = new Color(173, 216, 230); // Soft blue color
+
+    public static void setPlayManager(PlayManager manager) {
+        playManager = manager;
+    }
 
     public ConfigurationScreen(CardLayout cardLayout, JPanel cardPanel) {
         this.setLayout(new GridBagLayout());
@@ -74,12 +84,13 @@ public class ConfigurationScreen extends JPanel {
         this.add(fieldWidthLabel, gbc);
         fieldWidthSlider.addChangeListener(e -> {
             int value = fieldWidthSlider.getValue();
-            if (value % 2 != 0) { // If the value is odd, adjust it
-                fieldWidthSlider.setValue(value - 1); // Set to the previous even number
-            }
+//            if (value % 2 != 0) {
+//                fieldWidthSlider.setValue(value - 1);
+//            }
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthValue = fieldWidthSlider.getValue();
+            System.out.println(fieldWidthValue);
 
         });
 
@@ -102,6 +113,7 @@ public class ConfigurationScreen extends JPanel {
         fieldHeightSlider.addChangeListener(e -> {
             fieldHeightLabel.setText(String.valueOf(fieldHeightSlider.getValue()));
             fieldHeightValue = fieldHeightSlider.getValue();
+            PlayManager.getInstance().refreshFieldSize();
         });
 
         // Game Level Slider
@@ -123,6 +135,7 @@ public class ConfigurationScreen extends JPanel {
         gameLevelSlider.addChangeListener(e -> {
             gameLevelLabel.setText(String.valueOf(gameLevelSlider.getValue()));
             gameLevelValue = gameLevelSlider.getValue();
+            PlayManager.getInstance().refreshFieldSize();
         });
 
         // Music On/Off
@@ -133,7 +146,12 @@ public class ConfigurationScreen extends JPanel {
         customizeCheckBox(musicCheckBox);
         gbc.gridx = 1;
         this.add(musicCheckBox, gbc);
-//        musicCheckBox.addActionListener(e -> updateCheckBoxLabel(musicCheckBox));
+        musicCheckBox.addActionListener(e -> {
+            toggleMusic();
+            if (playManager != null) {
+                playManager.toggleMusic(); // Toggle music in play manager
+            }
+        });
 
         // Sound Effect On/Off
         gbc.gridx = 0;
@@ -143,7 +161,13 @@ public class ConfigurationScreen extends JPanel {
         customizeCheckBox(soundEffectCheckBox);
         gbc.gridx = 1;
         this.add(soundEffectCheckBox, gbc);
-//        soundEffectCheckBox.addActionListener(e -> updateCheckBoxLabel(soundEffectCheckBox));
+        soundEffectCheckBox.addActionListener(e -> {
+            toggleSound();
+            if (playManager != null) {
+                playManager.toggleSoundEffects(); // Toggle music in play manager
+            }
+
+        });
 
         // AI Play
         gbc.gridx = 0;
@@ -207,18 +231,17 @@ public class ConfigurationScreen extends JPanel {
     }
 
     public void toggleMusic() {
-        boolean isSelected = !musicCheckBox.isSelected();
-        musicCheckBox.setSelected(isSelected);
+        isMusicSelected= !isMusicSelected;
+        musicCheckBox.setSelected(isMusicSelected);
         updateCheckBoxLabel(musicCheckBox);
-
-        updateCheckBoxMusic(musicCheckBox, isSelected);
+        updateCheckBoxMusic(musicCheckBox, isMusicSelected);
 
     }
 
     public void toggleSound() {
-        boolean isSelected = !soundEffectCheckBox.isSelected();
-        soundEffectCheckBox.setSelected(isSelected);
-        updateCheckBoxMusic(soundEffectCheckBox, isSelected);
+        isSoundSelected=!isSoundSelected;
+        soundEffectCheckBox.setSelected(isSoundSelected);
+        updateCheckBoxMusic(soundEffectCheckBox, isSoundSelected);
         updateCheckBoxLabel(soundEffectCheckBox);
 
     }
