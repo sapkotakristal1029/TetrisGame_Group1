@@ -7,14 +7,11 @@
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/database/scores.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/GameFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/game/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/KeyHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/screens/ConfigurationScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/ConfigurationScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/screens/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/MainScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mino/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/Block.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,29 +39,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Scores.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Software Engineering/Asignment/TetrisGame_Group1&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Scores.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/Software Engineering/Asignment/TetrisGame_Group1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;GitIgnore&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "GitIgnore"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main" />

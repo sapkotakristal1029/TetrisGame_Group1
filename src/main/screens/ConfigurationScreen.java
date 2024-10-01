@@ -33,6 +33,7 @@ public class ConfigurationScreen extends JPanel {
 
     boolean isSoundSelected = true;
     boolean isMusicSelected = true;
+    private final Dimension defaultFrameSize = new Dimension(1000, 750);
 
 
     String spaces = " ".repeat(100);
@@ -84,9 +85,6 @@ public class ConfigurationScreen extends JPanel {
         this.add(fieldWidthLabel, gbc);
         fieldWidthSlider.addChangeListener(e -> {
             int value = fieldWidthSlider.getValue();
-//            if (value % 2 != 0) {
-//                fieldWidthSlider.setValue(value - 1);
-//            }
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthLabel.setText(String.valueOf(fieldWidthSlider.getValue()));
             fieldWidthValue = fieldWidthSlider.getValue();
@@ -267,7 +265,6 @@ public class ConfigurationScreen extends JPanel {
             super.paint(g, c);
         }
     }
-
     private class BackButtonListener implements ActionListener {
         private CardLayout cardLayout;
         private JPanel cardPanel;
@@ -279,6 +276,12 @@ public class ConfigurationScreen extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(cardPanel);
+            if (frame != null) {
+                frame.setSize(defaultFrameSize); // Set the frame to the target size
+                frame.setLocationRelativeTo(null); // Center the frame on the screen
+            }
+
             cardLayout.show(cardPanel, "MainScreen");
         }
     }

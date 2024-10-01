@@ -12,9 +12,9 @@ import java.util.concurrent.Executors;
 public class GamePanel extends JPanel implements Runnable {
 
     public static final int WIDTH = 1300;
-    public static final int HEIGHT = 850;
+    public static final int HEIGHT = 1000;
 
-    private static final int FPS = 60; // Frames per second
+    private static final int FPS = 60;
     private Thread gameThread;
     private PlayManager pm;
     private boolean running = false;
@@ -23,14 +23,13 @@ public class GamePanel extends JPanel implements Runnable {
     private JPanel cardPanel;
     private ExecutorService executorService; // ExecutorService for managing threads
 
+    private final Dimension defaultFrameSize = new Dimension(1000, 750); // Default frame size for MainScreen
     private boolean backPressed = false; // Flag to track if back button is pressed
 
     // Constructor with CardLayout and JPanel
     public GamePanel(CardLayout cardLayout, JPanel cardPanel) {
         this.cardLayout = cardLayout;
         this.cardPanel = cardPanel;
-
-        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(Color.black);
         this.setLayout(null);
 
@@ -38,13 +37,13 @@ public class GamePanel extends JPanel implements Runnable {
         KeyHandler keyHandler = new KeyHandler();
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
-        this.requestFocusInWindow(); // Ensure focus is set
+        this.requestFocusInWindow();
 
         pm = PlayManager.getInstance();
 
         // Initialize and add back button
         backButton = new JButton("Back");
-        backButton.setBounds(1200, 820, 100, 30);
+        backButton.setBounds(20, 30, 100, 30);
         backButton.setBackground(Color.DARK_GRAY);
         backButton.setForeground(Color.white);
         // Replace ActionListener with lambda expression
@@ -116,11 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
         g2.setColor(Color.black);
         g2.fillRect(0, 0, WIDTH, HEIGHT);
 
-        // Draw Tetris-like title text on the left side
-        g2.setFont(new Font("SansSerif", Font.BOLD, 100));
-        g2.setColor(new Color(128, 0, 128));
-        g2.drawString("TETRIS", 50, 350);
-        g2.drawString("GAME", 75, 450);
+
 
         // Draw game elements
         pm.draw(g2);
@@ -188,6 +183,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         // Switch to the MainScreen
         cardPanel.remove(GamePanel.this);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(cardPanel);
+        if (frame != null) {
+            frame.setSize(defaultFrameSize); // Set the frame to the target size
+            frame.setLocationRelativeTo(null); // Center the frame on the screen
+        }
+
         cardLayout.show(cardPanel, "MainScreen");
 
         // Unpause game if paused

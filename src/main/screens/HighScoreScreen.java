@@ -14,6 +14,7 @@ public class HighScoreScreen extends JPanel {
 
     private JButton backButton;
     private JButton clearButton;
+    private final Dimension defaultFrameSize = new Dimension(1000, 750); // Default frame size for MainScreen
     String[] columnNames = {"Player Name", "Score"};
     DefaultTableModel model = new DefaultTableModel(columnNames,0);
 
@@ -172,6 +173,12 @@ public class HighScoreScreen extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(cardPanel);
+            if (frame != null) {
+                frame.setSize(defaultFrameSize); // Set the frame to the target size
+                frame.setLocationRelativeTo(null); // Center the frame on the screen
+            }
+
             cardLayout.show(cardPanel, "MainScreen");
         }
     }

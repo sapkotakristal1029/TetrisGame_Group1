@@ -272,10 +272,18 @@ public class PlayManager {
         g2.setColor(Color.white);
         g2.setStroke(new BasicStroke(4f));
         g2.drawRect(left_x - 4, top_y - 4, WIDTH + 8, HEIGHT + 8);
-
-        // Draw a mino frame
         int x = right_x + 50;
         int y = top_y + 200;
+
+//        / Draw Tetris-like title text on the left side
+        g2.setFont(new Font("SansSerif", Font.BOLD, 100));
+        g2.setColor(new Color(128, 0, 128));
+        g2.drawString("TETRIS", 50, (bottom_y-top_y)/2);
+        g2.drawString("GAME", 75, (bottom_y-top_y)/2+100);
+
+        // Draw a mino frame
+
+
         g2.setColor(new Color(128, 0, 128)); // Purple color
         g2.drawRect(x, y, 170, 175);
         g2.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -300,7 +308,7 @@ public class PlayManager {
         g2.drawRect(x, top_y, 170, 200);
         x += 25;
         y = top_y + 30;
-        g2.setFont(new Font("Arial", Font.PLAIN, 16));
+        g2.setFont(new Font("Arial", Font.PLAIN, 18));
         g2.drawString("START LEVEL: " + ConfigurationScreen.gameLevelValue, x, y);
         y += 30;
         g2.drawString("LEVEL: " + level, x, y);
