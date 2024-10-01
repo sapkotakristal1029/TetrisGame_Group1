@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/database/scores.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scoresRecord/Scores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scoresRecord/Scores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/screens/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/MainScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/Block.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +45,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/swl/Documents/softwareDesign/TetrisGame_Group1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Software Engineering/Asignment/TetrisGame_Group1&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -97,14 +99,6 @@
         <item itemvalue="Application.Scores" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

@@ -60,7 +60,7 @@ public class MainScreen extends JPanel {
         this.add(buttonPanel, BorderLayout.CENTER);
 
         // Set Main Screen properties
-        this.setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
+        this.setPreferredSize(new Dimension(1200, 720));
     }
 
     // Override the paintComponent method to draw the background image
@@ -89,7 +89,7 @@ public class MainScreen extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             GamePanel gamePanel = new GamePanel(cardLayout, cardPanel); // Pass the parameters
-            cardPanel.add(gamePanel, "GamePanel");
+            cardPanel.add(gamePanel, "GamePanel");;
             cardLayout.show(cardPanel, "GamePanel");
             gamePanel.startGame();
         }

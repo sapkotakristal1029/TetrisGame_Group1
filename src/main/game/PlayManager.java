@@ -84,7 +84,7 @@ public class PlayManager {
 
         System.out.println("GAme Started at "+WIDTH+","+HEIGHT);
         // Main Play Area Frame
-        left_x = (GamePanel.WIDTH / 4);
+        left_x = (GamePanel.WIDTH / 2) - (WIDTH / 2);
         right_x = left_x + WIDTH;
         top_y = 50;
         bottom_y = top_y + HEIGHT;

@@ -5,7 +5,7 @@ import java.awt.*;
 public class Block extends Rectangle{
 
     public int x,  y;
-    public static final int SIZE =25; //BLOCK SIZE IS 30X30
+    public static final int SIZE =30; //BLOCK SIZE IS 30X30
     public Color c;
 
     public Block (Color c){
