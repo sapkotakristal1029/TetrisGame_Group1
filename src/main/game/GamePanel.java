@@ -86,15 +86,21 @@ public class GamePanel extends JPanel implements Runnable {
         long currentTime;
 
         while (running) {
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
-            lastTime = currentTime;
+            try {
+                currentTime = System.nanoTime();
+                delta += (currentTime - lastTime) / drawInterval;
+                lastTime = currentTime;
 
-            if (delta >= 1) {
-                // Offload heavy game updates to the executor service
-                executorService.submit(() -> update());
-                repaint();
-                delta--;
+                if (delta >= 1) {
+                    // Offload heavy game updates to the executor service
+                    executorService.submit(() -> update());
+                    repaint();
+                    delta--;
+                }
+            } catch (Exception e) {
+                System.err.println("An error occurred during game update: " + e.getMessage());
+                e.printStackTrace();
+                stopGame(); // Stop the game safely in case of an error
             }
         }
     }

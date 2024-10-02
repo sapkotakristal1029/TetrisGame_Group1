@@ -88,8 +88,6 @@ public abstract class AbstractMino implements Mino {
         rightCollision=false;
         bottomCollision=false;
         checkStaticBlocksCollision();
-
-
 //        check Frame Border Collision
         //LEFT WALL
         for(int i = 0; i< b.length; i++){
@@ -98,7 +96,6 @@ public abstract class AbstractMino implements Mino {
                 break;
             }
         }
-
         //RIGHT WALL
         for(int i = 0; i< b.length; i++){
             if (tempB[i].x + Block.SIZE > PlayManager.right_x) {
@@ -113,9 +110,7 @@ public abstract class AbstractMino implements Mino {
                 bottomCollision = true;
                 break;
             }
-
         }
-
 
     }
     public void checkStaticBlocksCollision(){

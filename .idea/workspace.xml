@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="141e4c1f-30c4-4b85-843b-9618eac33351" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/main/MainTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/main/game/GamePanelTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/scores.json" beforeDir="false" afterPath="$PROJECT_DIR$/database/scores.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TetrisGame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TetrisGame.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/game/PlayManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/game/PlayManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/screens/ConfigurationScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/ConfigurationScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/HighScoreScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/screens/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/screens/MainScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mino/AbstractMino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mino/AbstractMino.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +23,7 @@
         <option value="Class" />
         <option value="Interface" />
         <option value="Record" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -43,7 +43,14 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "Application.Scores.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.All in TetrisGame.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/Software Engineering/Asignment/TetrisGame_Group1",
@@ -52,8 +59,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -66,8 +74,16 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="main.game" />
+      <recent name="main.screens" />
+      <recent name="main" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.All in TetrisGame">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="TetrisGame" />
@@ -94,8 +110,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in TetrisGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TetrisGame" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in TetrisGame" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Scores" />
       </list>
